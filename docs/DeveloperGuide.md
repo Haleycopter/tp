@@ -287,16 +287,26 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
-
-*{More to be added}*
+| Priority | As a …​                                                | I want to …​                                                   | So that I can…​                                                                                             |
+|----------|--------------------------------------------------------|----------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------|
+| `* * *`  | new user with internet access                          | see usage instructions in User Guide                           | refer to instructions when I learn or forget how to use the app                                             |
+| `* * *`  | user without internet access                           | view an offline help menu                                      | learn how to use the app even when I am offline                                                             |
+| `* * *`  | user                                                   | add a new employee                                             | I can record details about an employee                                                                      |
+| `* * *`  | user                                                   | delete an employee                                             | ensure data privacy by removing past employees                                                              |
+| `* * *`  | user                                                   | find employee(s) by specific details                           | locate details of employees without having to go through the entire list                                    |
+| `* * `   | forgetful user                                         | find employee(s) by substrings                                 | locate details of employees without having to go through the entire list and remember full specific details |
+| `* * *`  | returning user                                         | save and load contacts via a file                              | quickly restore data from a past session                                                                    |
+| `* * `   | user who likes categorising details                    | add tags to employee contacts                                  | organise employee records by tags                                                                           |
+| `* * `   | user who likes categorising details                    | remove tags to employee contacts                               | organise employee records by tags                                                                           |
+| `*  `    | busy user who likes categorising details               | mass add and remove tags from currently displayed contact list | efficiently organise employee records by tags if I am working on a larger scale                             |
+| `* *`    | user who may not have all details at the moment        | add a new employee with partial details                        | at least create a simple record in the contact list, to be updated later                                    |
+| `* *`    | busy user                                              | edit specific employee details                                 | can be more efficient by not having to delete existing contacts and adding updated ones                     |
+| `* *`    | user who handles many specific employee details        | sort employees by a specified order                            | quickly view or gather information about employees with a certain criteria                                  |
+| `* *`    | user has a small screen                                | maximise my contact list on screen                             | actually view employee details and not see output box when I do not need it                                 |
+| `* *`    | user prone to typos                                    | undo my previous command                                       | efficiently restore past details without having to check what they orginally were                           |
+| `* `     | new user                                               | upload file to add a group of employees at once                | be able to not add employees one by one                                                                     |
+| `* `     | user who wants to check employees with missing details | view highlighted missing details of employees                  | efficiently see missing information that I have to fill in                                                  |
+| `* `     | user afraid of losing current employee data            | auto backup current employee data to a secondary file          | guard against corruption of main data file                                                                  |
 
 ### Use cases
 
