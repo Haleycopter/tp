@@ -40,15 +40,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Code Quality
 * Responsibilities: Looks after code quality, ensures adherence to coding standards, etc.
 
-### Jean Doe
+### James Chin
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/somebody-somewher.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/Somebody-somewher)]
+[[portfolio](team/somebody-somewher.md)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Role: Testing
+* Responsibilities: Ensures the testing of the project is done properly and on time.
 
 ### Haley Bong
 
