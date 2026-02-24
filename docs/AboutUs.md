@@ -11,51 +11,51 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Ong Chee How
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/ch144.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/ch144)]
+[[portfolio](team/ch144.md)]
 
-* Role: Project Advisor
+* Role: Scheduling and tracking.
+* Responsibilities: In charge of defining, assigning, and tracking project tasks.
 
-### Jane Doe
+### Xiao Hui
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/ixiahuo.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/ixiahuo)]
+[[portfolio](team/ixiahuo.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Documentation
+* Responsibilities: Maintain the project documentation and ensure code is well-documented.
 
-### Johnny Doe
+### Ennaaya
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/mehxa.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/mehxa)] [[portfolio](team/mehxa.md)]
 
-* Role: Developer
-* Responsibilities: Data
+* Role: Code Quality
+* Responsibilities: Looks after code quality, ensures adherence to coding standards, etc.
 
-### Jean Doe
+### James Chin
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/somebody-somewher.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/Somebody-somewher)]
+[[portfolio](team/somebody-somewher.md)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Role: Testing
+* Responsibilities: Ensures the testing of the project is done properly and on time.
 
-### James Doe
+### Haley Bong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/haleycopter.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/Haleycopter)]
+[portfolio](team/haleycopter.md)
 
-* Role: Developer
-* Responsibilities: UI
+* Role: Deliverables and deadlines
+* Responsibilities: Ensure project deliverables are done on time and in the right format.
