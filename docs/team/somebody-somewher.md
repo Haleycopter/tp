@@ -38,4 +38,4 @@ Given below are my contributions to the project.
   * Some parts of the history feature I added was adopted by several other classmates (-- TODO --)
 
 * **Tools**:
-* -- TODO -- 
+* -- TODO --
