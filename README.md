@@ -1,4 +1,4 @@
-[![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
+[![Java CI](https://github.com/AY2526S2-CS2103T-T09-1/tp/actions/workflows/gradle.yml/badge.svg)](https://github.com/AY2526S2-CS2103T-T09-1/tp/actions)
 
 ![Ui](docs/images/Ui.png)
 
@@ -8,3 +8,6 @@
   * as a case study
 * It comes with a **reasonable level of user and developer documentation**.
 * For the detailed documentation of this project, see the **[Big Brother Product Website](https://ay2526s2-cs2103t-t09-1.github.io/tp/index.html)**.
+## Acknowledgements
+* Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
+* This project evolved from the [AddressBook-Level3 project](https://github.com/se-edu/addressbook-level3) created by the [SE-EDU initiative](https://se-education.org).
