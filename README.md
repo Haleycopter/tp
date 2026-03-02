@@ -4,8 +4,10 @@
 
 * **Big Brother** is a desktop application for HR managers in startups to maintain and update employee details. It is optimised for use via a CLI, but also has a GUI created with JavaFX. <br>
   It features:
-  * as a starting point of a course project (as opposed to writing everything from scratch)
-  * as a case study
+  * Adding and deleting employee profiles
+  * In-app help menu
+  * [COMING SOON] Sorting and searching functions
+  * [COMING SOON] Tagging for employee profiles
 * It comes with a **reasonable level of user and developer documentation**.
 * For the detailed documentation of this project, see the **[Big Brother Product Website](https://ay2526s2-cs2103t-t09-1.github.io/tp/index.html)**.
 ## Acknowledgements
