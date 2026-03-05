@@ -340,8 +340,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Employee profile**: Grouped information about an employee's name, phone number, email, address, associated tags (if any), salary and certificates (if any)
-* **Saved locally**: Data is stored on the user's device and is not pulled from any online database or cloud system
-* **CLI**: An app interface where the mode of interaction is typed commands that are interpretable by the system 
+* **Invalid command**: A command that is not supported by the application.
+* **Above average typing speed**: An average typing speed > 80 WPM.
 
 --------------------------------------------------------------------------------------------------------------------
 
