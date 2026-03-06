@@ -34,7 +34,7 @@ public class Phone {
 
     /**
      * Returns true if a given string is a valid phone number.
-     * Field be empty but not null
+     * The phone field can be empty.
      */
     public static boolean isValidPhone(String test) {
         return test.isEmpty() || test.matches(VALIDATION_REGEX);
