@@ -10,15 +10,17 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Name {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Names should only contain alphabets, spaces, forward slashes and it should not be blank";
+            "Names should only contain alphabets, spaces, forward slashes and it should not be blank"
+            + "If a “/” is used (e.g., S/O), the letters immediately before and after must be uppercase";
 
     /*
      * (1) Only alphabetical characters, single spaces, and forward slashes.
      * (2) Cannot be blank.
+     * (3) If Name contains forward slashes, then alphabets before and after the forward slash must be uppercase
      * This regex ensures the first and last characters are not spaces,
      * and only single spaces are allowed between characters.
      */
-    public static final String VALIDATION_REGEX = "^[a-zA-Z/]+( [a-zA-Z/]+)*$";
+    public static final String VALIDATION_REGEX = "^[a-zA-Z]+(([ ]|[A-Z]/[A-Z])[a-zA-Z]*)*$";
 
     public final String fullName;
 
