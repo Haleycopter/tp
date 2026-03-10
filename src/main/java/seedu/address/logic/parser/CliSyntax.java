@@ -13,4 +13,8 @@ public class CliSyntax {
     public static final Prefix PREFIX_SALARY = new Prefix("s/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
 
+    /* Prefix definitions for cert command */
+    public static final Prefix PREFIX_CERT_NAME = new Prefix("n/");
+    public static final Prefix PREFIX_CERT_EXPIRY = new Prefix("e/");
+
 }

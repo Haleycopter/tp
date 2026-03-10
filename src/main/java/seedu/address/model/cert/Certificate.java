@@ -1,0 +1,74 @@
+package seedu.address.model.cert;
+
+import java.time.LocalDate;
+import java.util.Objects;
+import java.util.Set;
+
+import javax.swing.text.html.HTML.Tag;
+
+import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.cert.CertName;
+import seedu.address.model.person.Person;
+import seedu.address.model.cert.CertExpiry;
+
+public class Certificate {
+    private CertName name;
+    private CertExpiry expiry;
+
+    public Certificate(CertName name) {
+        this.name = name;
+        this.expiry = new CertExpiry(LocalDate.parse("999999-31-31"));
+    }
+
+    public Certificate(CertName name, CertExpiry expiry) {
+        this.name = name;
+        this.expiry = expiry;
+    }
+
+    CertName getName() {
+        return name;
+    }
+
+    CertExpiry getExpiry() {
+        return expiry;
+    }
+
+    public boolean isSameCert(Certificate otherCertificate) {
+        if (otherCertificate == this) {
+            return true;
+        }
+
+        return otherCertificate != null
+                && otherCertificate.getName().equals(getName());
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof Certificate)) {
+            return false;
+        }
+
+        Certificate otherCert = (Certificate) other;
+        return name.equals(otherCert.name)
+                && expiry.equals(otherCert.expiry);
+    }
+
+    @Override
+    public int hashCode() {
+        // use this method for custom fields hashing instead of implementing your own
+        return Objects.hash(name, expiry);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("name", name)
+                .add("expiry date", expiry)
+                .toString();
+    }
+}
