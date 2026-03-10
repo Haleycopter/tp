@@ -5,7 +5,6 @@ import java.time.format.DateTimeFormatter;
 import java.time.DateTimeException;
 
 public class CertExpiry {
-    
     private LocalDate expiryDate;
     public static final String MESSAGE_CONSTRAINTS =
             "Certificate expiry dates should be in the format of yyyy-mm-dd.";
