@@ -10,6 +10,7 @@ public class CertExpiry {
     public static final String MESSAGE_CONSTRAINTS =
             "Certificate expiry dates should be in the format of yyyy-mm-dd.";
     private LocalDate expiryDate;
+    private LocalDate expiryDate;
 
     public CertExpiry(LocalDate expiry) {
         expiryDate = expiry;
@@ -25,6 +26,22 @@ public class CertExpiry {
         } catch (DateTimeException e) {
             return false;
         }
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (other instanceof CertExpiry otherDate) {
+            return this.expiryDate.equals(otherDate.expiryDate);
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return expiryDate.hashCode();
     }
 
     @Override

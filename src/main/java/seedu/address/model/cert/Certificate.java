@@ -13,8 +13,8 @@ public class Certificate {
     private final CertExpiry expiry;
 
     /**
-     * Constructor for a Certificate with no expiry date.
-     * Dummy value 9999-12-31 is used to substitute an impossibly distant expiry date.
+     * Constructor for a certificate with no expiry date.
+     * @param name name of certificate
      */
     public Certificate(CertName name) {
         this.name = name;
@@ -64,8 +64,7 @@ public class Certificate {
         }
 
         Certificate otherCert = (Certificate) other;
-        return name.equals(otherCert.name)
-                && expiry.equals(otherCert.expiry);
+        return name.equals(otherCert.name);
     }
 
     @Override

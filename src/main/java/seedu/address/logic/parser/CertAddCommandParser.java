@@ -17,8 +17,18 @@ import seedu.address.model.cert.Certificate;
 /**
  * Parses input arguments and creates a new CertAddCommand object.
  */
+/**
+ * Parses input arguments and creates a new CertAddCommand object.
+ */
 public class CertAddCommandParser implements Parser<CertAddCommand> {
 
+    /**
+     * Parses the given {@code String} of arguments in the context of the CertAddCommand
+     * and returns an CertAddCommand object for execution.
+     * @throws ParseException if the user input does not conform the expected format
+     */
+    public CertAddCommand parse(String args) throws ParseException {
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_CERT_NAME, PREFIX_CERT_EXPIRY);
     /**
      * Parses the given {@code String} of arguments in the context of the CertAddCommand
      * and returns an CertAddCommand object for execution.
@@ -31,16 +41,24 @@ public class CertAddCommandParser implements Parser<CertAddCommand> {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, CertAddCommand.MESSAGE_USAGE));
         }
+        if (!arePrefixesPresent(argMultimap, PREFIX_CERT_NAME, PREFIX_CERT_EXPIRY)) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, CertAddCommand.MESSAGE_USAGE));
+        }
 
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_CERT_NAME, PREFIX_CERT_EXPIRY);
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_CERT_NAME, PREFIX_CERT_EXPIRY);
 
         Index index;
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CertAddCommand.MESSAGE_USAGE), pe);
         }
 
+        CertName name = ParserUtil.parseCertName(argMultimap.getValue(PREFIX_CERT_NAME).get());
+        CertExpiry expiry = ParserUtil.parseCertExpiry(argMultimap.getValue(PREFIX_CERT_EXPIRY).get());
+        Certificate cert = new Certificate(name, expiry);
         CertName name = ParserUtil.parseCertName(argMultimap.getValue(PREFIX_CERT_NAME).get());
         CertExpiry expiry = ParserUtil.parseCertExpiry(argMultimap.getValue(PREFIX_CERT_EXPIRY).get());
         Certificate cert = new Certificate(name, expiry);

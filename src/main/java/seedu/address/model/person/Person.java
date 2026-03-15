@@ -30,7 +30,7 @@ public class Person {
     private ArrayList<Certificate> certs;
 
     /**
-     * Every field must be present and not null.
+     * Every field except certificates must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Salary salary) {
         requireAllNonNull(name, phone, email, address, tags, salary);
