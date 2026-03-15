@@ -60,6 +60,26 @@ public class PersonTest {
     }
 
     @Test
+    public void isSamePerson_noContactInfo_sameName() {
+        // Both persons have no phone && no email
+        Person p1 = new PersonBuilder().withName("John Doe")
+                .withPhone("").withEmail("").build();
+        Person p2 = new PersonBuilder().withName("John Doe")
+                .withPhone("").withEmail("").build();
+
+        assertTrue(p1.isSamePerson(p2));
+    }
+
+    @Test
+    public void isSamePerson_differentContactInfo_sameName() {
+        // Same name, but different phone/email should return false
+        Person p1 = new PersonBuilder(ALICE).withName("John Doe").build();
+        Person p2 = new PersonBuilder(BOB).withName("John Doe").build();
+
+        assertFalse(p1.isSamePerson(p2));
+    }
+
+    @Test
     public void equals() {
         // same values -> returns true
         Person aliceCopy = new PersonBuilder(ALICE).build();
