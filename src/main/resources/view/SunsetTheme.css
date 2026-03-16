@@ -137,8 +137,8 @@
 }
 
 .pane-with-border {
-     -fx-background-color: derive(#1d1d1d, 20%);
-     -fx-border-color: derive(#1d1d1d, 10%);
+     -fx-background-color: #012442;
+     -fx-border-color: #012442;
      -fx-border-top-width: 1px;
 }
 
