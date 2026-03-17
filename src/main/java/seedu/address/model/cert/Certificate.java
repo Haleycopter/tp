@@ -80,4 +80,8 @@ public class Certificate {
                 .add("expiry date", expiry)
                 .toString();
     }
+
+    public String displayCertString() {
+        return name + " : " + expiry.getDisplayDateString();
+    }
 }
