@@ -4,8 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -57,26 +59,21 @@ public class PersonTest {
         // same phone, different email -> returns false
         editedAlice = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
         assertFalse(ALICE.isSamePerson(editedAlice));
-    }
 
-    @Test
-    public void isSamePerson_noContactInfo_sameName() {
-        // Both persons have no phone && no email
-        Person p1 = new PersonBuilder().withName("John Doe")
-                .withPhone("").withEmail("").build();
-        Person p2 = new PersonBuilder().withName("John Doe")
-                .withPhone("").withEmail("").build();
+        // both persons have no phone && no email
+        editedAlice = new PersonBuilder(ALICE).withPhone("").withEmail("").build();
+        editedBob = new PersonBuilder(ALICE).withPhone("").withEmail("").build();
+        assertTrue(editedAlice.isSamePerson(editedBob));
 
-        assertTrue(p1.isSamePerson(p2));
-    }
+        // same name, but different phone should return false
+        editedAlice = new PersonBuilder(ALICE).withName("John Doe").withPhone(VALID_PHONE_AMY).build();
+        editedBob = new PersonBuilder(BOB).withName("John Doe").withPhone(VALID_PHONE_BOB).build();
+        assertFalse(editedAlice.isSamePerson(editedBob));
 
-    @Test
-    public void isSamePerson_differentContactInfo_sameName() {
-        // Same name, but different phone/email should return false
-        Person p1 = new PersonBuilder(ALICE).withName("John Doe").build();
-        Person p2 = new PersonBuilder(BOB).withName("John Doe").build();
-
-        assertFalse(p1.isSamePerson(p2));
+        // same name, but different email should return false
+        editedAlice = new PersonBuilder(ALICE).withName("John Doe").withEmail(VALID_EMAIL_AMY).build();
+        editedBob = new PersonBuilder(BOB).withName("John Doe").withEmail(VALID_EMAIL_BOB).build();
+        assertFalse(editedAlice.isSamePerson(editedBob));
     }
 
     @Test
