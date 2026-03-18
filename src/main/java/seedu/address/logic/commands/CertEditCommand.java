@@ -141,7 +141,9 @@ public class CertEditCommand extends Command {
 
         CertEditCommand otherCertEditCommand = (CertEditCommand) other;
         return toEdit.equals(otherCertEditCommand.toEdit)
-                && index.equals(otherCertEditCommand.index);
+                && index.equals(otherCertEditCommand.index)
+                && newName.equals(otherCertEditCommand.newName)
+                && newDate.equals(otherCertEditCommand.newDate);
     }
 
     @Override
@@ -149,6 +151,8 @@ public class CertEditCommand extends Command {
         return new ToStringBuilder(this)
                 .add("index", index)
                 .add("toEdit", toEdit)
+                .add("newName", newName)
+                .add("newDate", newDate)
                 .toString();
     }
 }
