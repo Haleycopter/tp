@@ -9,8 +9,8 @@ import seedu.address.commons.util.ToStringBuilder;
  * Represents a certificate that a person can hold.
  */
 public class Certificate {
-    private CertName name;
-    private CertExpiry expiry;
+    private final CertName name;
+    private final CertExpiry expiry;
 
     /**
      * Constructor for a certificate with no expiry date.
@@ -20,8 +20,11 @@ public class Certificate {
         this.name = name;
         this.expiry = new CertExpiry(LocalDate.parse("9999-12-31"));
     }
+
     /**
-     * Every field must be present.
+     * Constructor for a Certificate with an expiry date.
+     * @param name Name of Certificate
+     * @param expiry Expiry date of the Certificate
      */
     public Certificate(CertName name, CertExpiry expiry) {
         this.name = name;

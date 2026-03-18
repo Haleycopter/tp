@@ -23,7 +23,7 @@ public class CertExpiry {
     }
 
     /**
-     * Returns true if a given string is a valid certificate name.
+     * Returns true if a given string is a valid certificate expiry date.
      */
     public static boolean isValidCertExpiry(String test) {
         try {
