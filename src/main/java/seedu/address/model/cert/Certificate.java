@@ -1,5 +1,6 @@
 package seedu.address.model.cert;
 
+import java.time.LocalDate;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -19,11 +20,20 @@ public class Certificate {
         this.expiry = expiry;
     }
 
-    CertName getName() {
+    /**
+     * Overloaded constructor for a Certificate with no expiry date.
+     * @param name Certificate name.
+     */
+    public Certificate(CertName name) {
+        this.name = name;
+        this.expiry = new CertExpiry(LocalDate.parse("9999-12-31"));
+    }
+
+    public CertName getName() {
         return name;
     }
 
-    CertExpiry getExpiry() {
+    public CertExpiry getExpiry() {
         return expiry;
     }
 

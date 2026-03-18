@@ -1,24 +1,18 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CERT_EDIT_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CERT_EDIT_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_CERT_EXPIRY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CERT_NAME;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-
 import java.util.Optional;
+import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.CertAddCommand;
-import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.cert.CertExpiry;
@@ -106,7 +100,8 @@ public class CertEditCommand extends Command {
         return updatedCert;
     }
 
-    private static Person editCertForPerson(Person personToEdit, Certificate toEdit, Certificate updatedCert) {
+    private static Person editCertForPerson(Person personToEdit,
+            Certificate toEdit, Certificate updatedCert) throws CommandException {
         assert personToEdit != null;
         // find the index of toEdit in the person's list of certificates
         ArrayList<Certificate> certList = new ArrayList<Certificate>(personToEdit.getCertificates());
