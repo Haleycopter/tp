@@ -2,14 +2,20 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Arrays;
+import java.util.Set;
+import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.TagContainsKeywordsPredicate;
+import seedu.address.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -22,24 +28,35 @@ public class FindCommandParser implements Parser<FindCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindCommand parse(String args) throws ParseException {
+        Predicate<Person> predicateToFind = null;
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME);
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME)
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_TAG);
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_TAG)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
-        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        String[] nameKeywords = name.fullName.split("\\s+");
 
-        return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
+            Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+            String[] nameKeywords = name.fullName.split("\\s+");
+            predicateToFind = new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords));
+        }
+
+        if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
+            Set<Tag> tags = ParserUtil.parseTags(Set.of(argMultimap
+                    .getValue(PREFIX_TAG).get().split("\\s+")));
+            predicateToFind = new TagContainsKeywordsPredicate(tags);
+        }
+
+        return new FindCommand(predicateToFind);
     }
 
     /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * Returns true if at least one of the prefixes contain a value in the given
      * {@code ArgumentMultimap}.
      */
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+        return Stream.of(prefixes).anyMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 
 }
