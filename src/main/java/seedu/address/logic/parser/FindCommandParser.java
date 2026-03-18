@@ -11,7 +11,6 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.TagContainsKeywordsPredicate;
@@ -32,19 +31,19 @@ public class FindCommandParser implements Parser<FindCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_TAG);
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_TAG)
-                || !argMultimap.getPreamble().isEmpty()) {
+                || !argMultimap.getPreamble().trim().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-            String[] nameKeywords = name.fullName.split("\\s+");
+            String[] nameKeywords = argMultimap.getValue(PREFIX_NAME).get().split("\\s+");
             predicateToFind = new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords));
         }
 
         if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
             Set<Tag> tags = ParserUtil.parseTags(Set.of(argMultimap
                     .getValue(PREFIX_TAG).get().split("\\s+")));
+            System.out.println(tags);
             predicateToFind = new TagContainsKeywordsPredicate(tags);
         }
 
