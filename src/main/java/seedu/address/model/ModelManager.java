@@ -121,8 +121,9 @@ public class ModelManager implements Model {
     @Override
     public void undoAddressBook() {
         if (this.canUndo()) {
-            setAddressBook(previousAddressBook);
+            this.addressBook.resetData(previousAddressBook);
             previousAddressBook = null; //clear after use, since undo only restores back to 1 state prior
+            updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         }
     }
 

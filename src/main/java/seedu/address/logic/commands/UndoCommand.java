@@ -9,7 +9,7 @@ public class UndoCommand extends Command {
 
     public static final String MESSAGE_USAGE = String.format(
             "%s : Restores the contact list to the previous state.\n"
-                    + "Example : %s");
+                    + "Example : %s", COMMAND_WORD, COMMAND_WORD);
 
     public static final String UNDO_MESSAGE_SUCCESS = "Undid the previous command.";
     public static final String UNDO_MESSAGE_FAILURE = "No previous commands to undo.";

@@ -55,10 +55,6 @@ public class AddressBookParser {
         // Lower level log messages are used sparingly to minimize noise in the code.
         logger.fine("Command word: " + commandWord + "; Arguments: " + arguments);
 
-        if (commandWord.toLowerCase().startsWith(UndoCommand.COMMAND_WORD)) {
-            commandWord = UndoCommand.COMMAND_WORD;
-        }
-
         switch (commandWord) {
 
         case AddCommand.COMMAND_WORD:
