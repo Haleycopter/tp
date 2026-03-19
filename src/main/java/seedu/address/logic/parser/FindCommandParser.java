@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CERT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -14,6 +15,9 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.cert.CertName;
+import seedu.address.model.cert.Certificate;
+import seedu.address.model.person.CertContainsKeywordsPredicate;
 import seedu.address.model.person.CombinedPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -33,8 +37,8 @@ public class FindCommandParser implements Parser<FindCommand> {
     public FindCommand parse(String args) throws ParseException {
         List<Predicate<Person>> predicates = new ArrayList<>();
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_TAG);
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_TAG)
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_TAG, PREFIX_CERT);
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_TAG, PREFIX_CERT)
                 || !argMultimap.getPreamble().trim().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
@@ -45,6 +49,10 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
             predicates.add(getTagPredicate(argMultimap));
+        }
+
+        if (argMultimap.getValue(PREFIX_CERT).isPresent()) {
+            predicates.add(getCertPredicate(argMultimap));
         }
 
         return new FindCommand(new CombinedPredicate(predicates));
@@ -62,15 +70,24 @@ public class FindCommandParser implements Parser<FindCommand> {
         List<String> names = argMultimap.getAllValues(PREFIX_NAME)
             .stream().map(String::strip).collect(Collectors.toList());
         names.replaceAll(String::trim);
-        System.out.println(names);
         return new NameContainsKeywordsPredicate(names);
     }
 
     private TagContainsKeywordsPredicate getTagPredicate(ArgumentMultimap argMultimap) {
-        List<Set<Tag>> tagGroups = argMultimap.getAllValues(PREFIX_TAG).stream()
-                .map(this::parseAndGroupTags)
-                .collect(Collectors.toList());
+        List<Set<Tag>> tagGroups = argMultimap.getAllValues(PREFIX_TAG)
+            .stream().map(this::parseAndGroupTags).collect(Collectors.toList());
         return new TagContainsKeywordsPredicate(tagGroups);
+    }
+
+    private CertContainsKeywordsPredicate getCertPredicate(ArgumentMultimap argMultimap) {
+        List<Certificate> certsList = argMultimap.getAllValues(PREFIX_CERT)
+            .stream()
+            .map(name -> name.trim())
+            .filter(name -> !name.isEmpty())
+            .map(name -> new Certificate(new CertName(name)))
+            .collect(Collectors.toList());
+        ArrayList<Certificate> certs = new ArrayList<>(certsList);
+        return new CertContainsKeywordsPredicate(certs);
     }
 
     private Set<Tag> parseAndGroupTags(String tagEntry) {

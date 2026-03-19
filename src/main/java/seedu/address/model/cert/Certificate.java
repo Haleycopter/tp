@@ -3,6 +3,7 @@ package seedu.address.model.cert;
 import java.time.LocalDate;
 import java.util.Objects;
 
+import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
@@ -50,6 +51,10 @@ public class Certificate {
 
         return otherCertificate != null
                 && otherCertificate.getName().equals(getName());
+    }
+
+    public boolean containsCertNameIgnoreCase(Certificate otherCertificate) {
+        return StringUtil.containsWordIgnoreCase(name.certificateName, otherCertificate.name.certificateName);
     }
 
     @Override
