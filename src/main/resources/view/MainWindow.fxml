@@ -19,7 +19,7 @@
   <scene>
     <Scene>
       <stylesheets>
-        <URL value="@SunsetTheme.css" />
+        <URL value="@MainWindow.css" />
         <URL value="@Extensions.css" />
       </stylesheets>
 
