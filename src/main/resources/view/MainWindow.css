@@ -88,6 +88,13 @@
     -fx-text-fill: white;
 }
 
+.cell_small_label_bold {
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
 #tags {
     -fx-hgap: 7;
     -fx-vgap: 3;

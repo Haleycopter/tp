@@ -1,47 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
 <VBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
   <ScrollPane VBox.vgrow="ALWAYS" fitToWidth="true">
     <GridPane>
+      <VBox alignment="CENTER_LEFT">
+        <padding>
+          <Insets top="5" right="5" bottom="5" left="10" />
+        </padding>
 
-      <VBox alignment="CENTER_LEFT" GridPane.rowIndex="0">
         <HBox>
-        <Label fx:id="id" styleClass="cell_big_label" />
-        <Label fx:id="name" styleClass="cell_big_label" text="\$first" wrapText="true" />
+          <Label fx:id="id" styleClass="cell_big_label">
+            <minWidth>
+              <Region fx:constant="USE_PREF_SIZE" />
+            </minWidth>
+          </Label>
+          <Label fx:id="name" styleClass="cell_big_label" text="\$first" wrapText="true" />
         </HBox>
-      </VBox>
 
-      <VBox alignment="CENTER_LEFT" GridPane.rowIndex="1">
         <FlowPane fx:id="tags" />
-      </VBox>
 
-      <VBox alignment="CENTER_LEFT" GridPane.rowIndex="2">
-        <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" wrapText="true" />
-      </VBox>
+        <HBox>
+          <Label styleClass="cell_small_label_bold" text="Phone: ">
+            <minWidth>
+              <Region fx:constant="USE_PREF_SIZE" />
+            </minWidth>
+          </Label>
+          <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" wrapText="true" />
+        </HBox>
 
-      <VBox alignment="CENTER_LEFT" GridPane.rowIndex="3">
-        <Label fx:id="address" styleClass="cell_small_label" text="\$address" wrapText="true" />
-      </VBox>
+        <HBox>
+          <Label styleClass="cell_small_label_bold" text="Addr: ">
+            <minWidth>
+              <Region fx:constant="USE_PREF_SIZE" />
+            </minWidth>
+          </Label>
+          <Label fx:id="address" styleClass="cell_small_label" text="\$address" wrapText="true" />
+        </HBox>
 
-      <VBox alignment="CENTER_LEFT" GridPane.rowIndex="4">
-        <Label fx:id="email" styleClass="cell_small_label" text="\$email" wrapText="true" />
-      </VBox>
+        <HBox>
+          <Label styleClass="cell_small_label_bold" text="Email: ">
+            <minWidth>
+              <Region fx:constant="USE_PREF_SIZE" />
+            </minWidth>
+          </Label>
+          <Label fx:id="email" styleClass="cell_small_label" text="\$email" wrapText="true" />
+        </HBox>
 
-      <VBox alignment="CENTER_LEFT" GridPane.rowIndex="5">
-        <Label fx:id="salary" styleClass="cell_small_label" text="\$salary" wrapText="true" />
-      </VBox>
+        <HBox>
+          <Label styleClass="cell_small_label_bold" text="Salary: ">
+            <minWidth>
+              <Region fx:constant="USE_PREF_SIZE" />
+            </minWidth>
+          </Label>
+          <Label fx:id="salary" styleClass="cell_small_label" text="\$salary" wrapText="true" />
+        </HBox>
 
-      <VBox alignment="CENTER_LEFT" GridPane.rowIndex="6">
+        <Label text="" />
+        <Label styleClass="cell_small_label_bold" text="Certifications:" />
         <FlowPane fx:id="certs" orientation="VERTICAL" />
       </VBox>
-
     </GridPane>
   </ScrollPane>
 </VBox>
