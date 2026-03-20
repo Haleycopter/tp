@@ -19,16 +19,17 @@ public class HelpWindow extends UiPart<Stage> {
             + " * 'edit' : edits an existing contact\n"
             + " * 'delete' : deletes an existing contact\n"
             + "    'clear' : deletes all existing contacts\n"
+            + "    'undo' : undos the immediate previous command\n"
             + " * 'cert-add' : adds a certificate to an existing contact\n"
             + " * 'cert-edit' : edits a certificate of an existing contact\n"
             + " * 'cert-del' : deletes a certificate from an existing contact\n"
             + " * 'tag' : adds or deletes tags from an existing contact\n"
+            + " * 'sort' : sorts the contact list based on given criteria\n"
             + " * 'find' : finds existing contacts based on search criteria\n"
             + "    'list' : lists all existing contacts\n"
             + "    'exit' : exits the applications\n"
             + "    'help': shows this help menu\n\n"
-            + "TIP: commands marked with * have detailed usage explanations.\n"
-            + "TIP: [ENTER] can be used to close help window popups.";
+            + "TIP: commands marked with * have detailed usage explanations.";
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
