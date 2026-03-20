@@ -38,13 +38,23 @@
     -fx-text-fill: white;
 }
 
-/* standardised scroll bar */
+/* Standardised ScrollPane */
+.scroll-pane {
+    -fx-background-color: #012442;
+}
+
 .scroll-bar {
     -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-pref-width: 10;
+    -fx-padding: 1;
 }
 
 .scroll-bar .thumb {
     -fx-background-color: derive(#1d1d1d, 50%);
+}
+
+.scroll-bar:vertical .increment-arrow, .scroll-bar:vertical .decrement-arrow {
+    -fx-padding: 0 0 0 0;
 }
 
 /* Footer: status bar */
