@@ -20,9 +20,9 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for your BigBrother.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar bigbrother.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
@@ -177,6 +177,27 @@ Format: `delete INDEX`
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+
+### Adding / Deleting tasks : `tag`
+
+Adds and/or deletes Tags for a specified person in the address book.
+
+Format `tag INDEX [a/TAGS TO ADD SEPARATED BY SPACE] [d/TAGS TO DELETE SEPARATED BY SPACE]`
+
+* Adds / Deletes Tags for the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* If multiple Tags are to be added/deleted, they are to be separated by space
+
+Examples:
+* `tag a/IT Intern` adds two Tags `IT` and `Intern`
+* `tag d/Best_Employee` deletes a Tag `Best_Employee`
+* `tag a/HR Best_Emplyee d/ IT` adds two Tags `HR` and `Best_Emplyee`, while deleting `IT`
+
+> Note that tags are:
+> - Only be one word
+> - Limited to Alphanumeric characters and these characters: !@#$?/|<>_*&:;=
+> - Max size 30 characters
 
 ### Clearing all entries : `clear`
 
