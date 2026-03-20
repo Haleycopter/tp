@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <VBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
-  <ScrollPane VBox.vgrow="ALWAYS" fitToWidth="true">
+  <ScrollPane fx:id="innerScrollPane" VBox.vgrow="ALWAYS" fitToWidth="true">
     <GridPane>
       <VBox alignment="CENTER_LEFT">
         <padding>

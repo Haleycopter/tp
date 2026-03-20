@@ -4,6 +4,8 @@ import java.util.Comparator;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -28,6 +30,8 @@ public class PersonCard extends UiPart<Region> {
 
     @FXML
     private VBox cardPane;
+    @FXML
+    private ScrollPane innerScrollPane;
     @FXML
     private Label name;
     @FXML
@@ -67,5 +71,8 @@ public class PersonCard extends UiPart<Region> {
                     l.maxWidthProperty().bind(certs.widthProperty());
                     certs.getChildren().add(l);
                 });
+
+        // prevent jumping to top if user clicks on any entry
+        innerScrollPane.addEventFilter(MouseEvent.MOUSE_PRESSED, e -> e.consume());
     }
 }
