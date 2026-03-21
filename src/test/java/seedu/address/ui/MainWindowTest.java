@@ -1,6 +1,7 @@
 package seedu.address.ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.testfx.util.WaitForAsyncUtils.waitForFxEvents;
@@ -47,11 +48,9 @@ class MainWindowTest {
     }
 
     @Test
-    void constructMainWindow_defaultDimensions_success(FxRobot robot) {
-        waitForFxEvents();
-        Stage stage = (Stage) robot.window(0);
-        assertEquals(DEFAULT_WIDTH, stage.getWidth());
-        assertEquals(DEFAULT_HEIGHT, stage.getHeight());
+    void constructMainWindow_defaultDimensions_success() {
+        assertEquals(DEFAULT_WIDTH, mainWindow.getRoot().getWidth());
+        assertEquals(DEFAULT_HEIGHT, mainWindow.getRoot().getHeight());
     }
 
     @Test
@@ -72,5 +71,31 @@ class MainWindowTest {
         StackPane commandBoxPlaceholder =
             robot.lookup("#commandBoxPlaceholder").queryAs(StackPane.class);
         assertEquals(1, commandBoxPlaceholder.getChildren().size());
+    }
+
+    @Test
+    void execute_show_success() throws TimeoutException {
+        FxToolkit.setupFixture(() -> {
+            mainWindow.show();
+        });
+        waitForFxEvents();
+        Stage primaryStage = mainWindow.getPrimaryStage();
+        assertTrue(primaryStage.isShowing());
+    }
+
+    @Test
+    void execute_handleHelp_success() throws TimeoutException {
+        FxToolkit.setupFixture(() -> {
+            mainWindow.handleHelp();
+        });
+        waitForFxEvents();
+        Stage helpWindow = mainWindow.getHelpWindow();
+        assertTrue(helpWindow.isShowing());
+
+        FxToolkit.setupFixture(() -> {
+            mainWindow.handleHelp();
+        });
+        waitForFxEvents();
+        assertTrue(helpWindow.isFocused());
     }
 }
