@@ -1,27 +1,27 @@
 package seedu.address.ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+//import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.TimeoutException;
+//import java.util.concurrent.TimeoutException;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.testfx.api.FxRobot;
-import org.testfx.api.FxToolkit;
+//import org.testfx.api.FxRobot;
+//import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
 
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.layout.StackPane;
+//import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Logic;
@@ -51,11 +51,6 @@ class MainWindowTest {
 
     @Test
     void constructMainWindow_defaultDimensions_success() throws InterruptedException {
-        try {
-            Platform.startup(() -> {});
-        } catch (IllegalStateException e) {
-
-        }
         CountDownLatch latch = new CountDownLatch(1);
         Platform.runLater(() -> {
             assertEquals(DEFAULT_WIDTH, mainWindow.getRoot().getWidth());
@@ -64,7 +59,7 @@ class MainWindowTest {
         });
         latch.await();
     }
-/*
+    /*
     @Test
     void execute_fillInnerParts_success(FxRobot robot) throws TimeoutException {
         FxToolkit.setupFixture(() -> {
@@ -102,5 +97,5 @@ class MainWindowTest {
             assertTrue(helpWindow.isFocused());
         });
     }
-*/
+    */
 }
