@@ -22,18 +22,10 @@ checkstyle {
 
 test {
     useJUnitPlatform()
-    jvmArgs = [
-        '--add-opens=javafx.graphics/com.sun.javafx.application=ALL-UNNAMED',
-        '--add-opens=javafx.graphics/com.sun.javafx.tk=ALL-UNNAMED',
-        '--add-opens=javafx.graphics/com.sun.javafx.stage=ALL-UNNAMED',
-        '--add-opens=javafx.controls/com.sun.javafx.scene.control=ALL-UNNAMED'
-    ]
     finalizedBy jacocoTestReport
 
     systemProperty "testfx.robot", "glass"
     systemProperty "testfx.headless", "true"
-    systemProperty "glass.platform", "Monocle"
-    systemProperty "monocle.platform", "Headless"
     systemProperty "prism.order", "sw"
     systemProperty "prism.text", "t2k"
     systemProperty "java.awt.headless", "true"
