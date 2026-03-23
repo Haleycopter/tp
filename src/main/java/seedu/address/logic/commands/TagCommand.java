@@ -5,9 +5,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADD_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DELETE_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.TreeSet;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
@@ -21,7 +21,6 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Salary;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.tag.TagColourComparator;
 import seedu.address.model.tag.TagNameComparator;
 
 /**

@@ -2,6 +2,9 @@ package seedu.address.model.tag;
 
 import java.util.Comparator;
 
+/**
+ * Compares Tags by Tag Colour for sorted display
+ */
 public class TagColourComparator implements Comparator<Tag> {
     @Override
     public int compare(Tag o1, Tag o2) {

@@ -8,9 +8,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DELETE_TAG;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.TreeSet;
 import java.util.Optional;
 import java.util.Set;
+import java.util.TreeSet;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.TagCommand;

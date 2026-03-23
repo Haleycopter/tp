@@ -12,8 +12,8 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
-import java.util.TreeSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 import org.junit.jupiter.api.Test;
 

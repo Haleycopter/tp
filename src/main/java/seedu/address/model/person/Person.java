@@ -4,9 +4,9 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.TreeSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.TreeSet;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.cert.Certificate;

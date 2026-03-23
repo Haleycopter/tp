@@ -4,9 +4,9 @@ import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDate;
 import java.util.Collection;
-import java.util.TreeSet;
 import java.util.Optional;
 import java.util.Set;
+import java.util.TreeSet;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;

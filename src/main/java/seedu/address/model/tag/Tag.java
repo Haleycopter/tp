@@ -5,8 +5,6 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import seedu.address.commons.util.StringUtil;
 
-import java.util.Comparator;
-
 /**
  * Represents a Tag in the address book.
  * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}

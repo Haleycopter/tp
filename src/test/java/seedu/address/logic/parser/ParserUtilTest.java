@@ -8,8 +8,8 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.TreeSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 import org.junit.jupiter.api.Test;
 
