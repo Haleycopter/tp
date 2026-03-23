@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -18,6 +19,9 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Salary;
 import seedu.address.model.tag.Tag;
+import seedu.address.ui.TagColour;
+
+import javax.swing.text.html.Option;
 
 
 /**
@@ -121,7 +125,7 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code tag} is invalid.
      */
-    public static Tag parseTag(String tag) throws ParseException {
+    public static Tag parseTag(String tag, TagColour tagColour) throws ParseException {
         requireNonNull(tag);
         String trimmedTag = tag.trim();
         if (!Tag.isValidTagName(trimmedTag)) {
@@ -130,17 +134,37 @@ public class ParserUtil {
         if (!Tag.isValidTagLength(trimmedTag)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS_LENGTH);
         }
-        return new Tag(trimmedTag);
+        return new Tag(trimmedTag, tagColour);
     }
 
     /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
      */
     public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
+        return parseTags(tags, TagColour.DEFAULT);
+    }
+
+    /**
+     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+     */
+    public static Set<Tag> parseTags(Collection<String> tags, String userInputTagColour) throws ParseException {
+        requireNonNull(userInputTagColour);
+        Optional<TagColour> colour = TagColour.getTagColourByUserInputName(userInputTagColour);
+
+        if (colour.isPresent()) {
+            return parseTags(tags, colour.get());
+        }
+
+        throw new ParseException(TagColour.MESSAGE_INVALID_COLOUR);
+
+    }
+
+    private static Set<Tag> parseTags(Collection<String> tags, TagColour tagColour) throws ParseException {
         requireNonNull(tags);
+
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
+            tagSet.add(parseTag(tagName, tagColour));
         }
         return tagSet;
     }

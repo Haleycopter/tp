@@ -61,7 +61,7 @@ public class PersonCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> {
                     Label tagLabel = new Label(tag.tagName);
-                    tagLabel.getStyleClass().add(TagColour.PURPLE.getCssClass());
+                    tagLabel.getStyleClass().add(tag.tagColour.getCssClass());
                     tags.getChildren().add(tagLabel);
                 });
 

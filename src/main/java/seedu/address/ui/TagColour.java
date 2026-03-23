@@ -1,5 +1,9 @@
 package seedu.address.ui;
 
+import seedu.address.commons.util.ToStringBuilder;
+
+import java.util.Optional;
+
 /**
  * Maps a Colour to its {@code cssClass}  equivalent.
  *
@@ -8,19 +12,42 @@ package seedu.address.ui;
  *
  */
 public enum TagColour {
-    RED("tag_colour_red"),
-    YELLOW("tag_colour_yellow"),
-    GREEN("tag_colour_green"),
-    PURPLE("tag_colour_purple"),
-    DEFAULT("tag_colour_default");
+    RED("tag_colour_red", "red"),
+    YELLOW("tag_colour_yellow", "yellow"),
+    GREEN("tag_colour_green", "green"),
+    PURPLE("tag_colour_purple", "purple"),
+    BLUE("tag_colour_default", "blue"),
+    DEFAULT("tag_colour_default", "default");
 
+    public static final String MESSAGE_INVALID_COLOUR =
+            "Tag Colour does not exist. We only have: RED, YELLOW, GREEN, BLUE OR PURPLE";
+
+    // Name of the cssClass that will be used to assign the colour in a css file
     private final String cssClass;
 
-    TagColour(String cssClass) {
+    // Name that the user will refer to this colour by via user input
+    private final String userColourName;
+
+    TagColour(String cssClass, String userColourName) {
         this.cssClass = cssClass;
+        this.userColourName = userColourName;
     }
 
     public String getCssClass() {
         return cssClass;
+    }
+
+    public static Optional<TagColour> getTagColourByUserInputName(String userColourName) {
+        for (TagColour c : TagColour.values()) {
+            if (c.userColourName.equalsIgnoreCase(userColourName)) {
+                return Optional.of(c);
+            }
+        }
+        return Optional.empty();
+    }
+
+    @Override
+    public String toString() {
+        return userColourName;
     }
 }
