@@ -59,6 +59,8 @@ public class PersonListPanel extends UiPart<Region> {
         int extraWidth = usableWidth % MIN_ENTRY_WIDTH / this.numColumns;
         this.entryWidth = MIN_ENTRY_WIDTH + extraWidth;
         assert this.entryWidth >= MIN_ENTRY_WIDTH : "Calculated entry width is less than the minimum!";
+
+        logger.info("----------------[PersonListPanel][Number of columns: " + this.numColumns + "]");
     }
 
     private void updateDisplay() {
@@ -86,6 +88,7 @@ public class PersonListPanel extends UiPart<Region> {
         }
 
         this.scrollPane.setVvalue(0); // reset scroll to top
+        logger.info("----------------[PersonListPanel][Display updated]");
     }
 
     /**
