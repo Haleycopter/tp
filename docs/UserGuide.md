@@ -166,28 +166,25 @@ Format: `delete INDEX`
 * Deletes the person at the specified `INDEX` of the displayed person list.
 
 Examples:
-* `list` followed by `delete 2` deletes the second person in the results of the `list` command.
-* `find n/John` followed by `delete 1` deletes the first person in the results of the `find` command.
+1. `list` followed by `delete 2` deletes the second person in the results of the `list` command.
+2. `find n/John` followed by `delete 1` deletes the first person in the results of the `find` command.
 
 <br>
 
-### Searching contacts by criteria: `find`
-
-Finds persons based on the given criteria.
-
+### Searching contacts by criteria : `find`
 Format: `find [n/NAME] [t/TAG] [c/CERT_NAME] [e/CERT_EXPIRY_DATE]`
 
-* At least one of the optional fields must be provided to search with
-* The search is case-insensitive
-* Partial words will be matched
-* Multiple values of the same field can be used to expand the search (i.e. `OR` search),
-except for `CERT_EXPIRY`.
-* Multiple fields can be used to narrow down the search (i.e `AND` search)
+* **At least one of the optional fields must be provided.**
+* For `NAME`, `TAG` and `CERT_NAME`, the match is case-insensitive and can match part of the word. eg:
+  * 'john' will match 'Johny'
+* For `CERT_EXPIRY_DATE`, the match is for certificates that expire **before** the provided date.
+* Multiple values of the same field can be used to expand the search (i.e. `OR` search), except for `CERT_EXPIRY`.
+* Multiple fields can be used to narrow down the search (i.e `AND` search).
 
 Examples:
-* `find n/Alex Y n/David` returns all persons whose name contains `Alex Y` or `David`
-* `find c/OSCP` returns all persons with certificate names containing `OSCP`
-* `find n/Alex t/IT e/2027-03-15` returns all persons whose name contains `Alex`, with tags that contain `IT` and with certificates that expire **before** 15th March 2027.
+1. `find n/Alex Y n/David` returns all persons whose name contains `Alex Y` or `David`.
+2. `find c/OSCP` returns all persons with certificate names containing `OSCP`.
+3. `find n/Alex t/IT e/2027-03-15` returns all persons whose name contains `Alex`, with tags that contain `IT` and with certificates that expire before 15th March 2027.
 
 <br>
 
