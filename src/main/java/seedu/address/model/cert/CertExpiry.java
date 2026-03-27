@@ -10,7 +10,9 @@ import java.time.LocalDate;
  */
 public class CertExpiry {
     public static final String MESSAGE_CONSTRAINTS =
-            "Certificate expiry dates should be in the format of yyyy-mm-dd";
+            "Certificate expiry dates should be in the format of yyyy-mm-dd.\n"
+            + "The date provided must also be a valid calendar date.\n"
+            + "Tip: check if it is a leap year or if the day exists in that month.";
     private LocalDate expiryDate;
 
     /**
