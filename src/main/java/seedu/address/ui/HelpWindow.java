@@ -29,7 +29,8 @@ public class HelpWindow extends UiPart<Stage> {
             + "    'list' : lists all existing contacts\n"
             + "    'exit' : exits the applications\n"
             + "    'help': shows this help menu\n\n"
-            + "TIP: commands marked with * have detailed usage explanations.";
+            + "TIP: commands marked with * have detailed usage explanations.\n"
+            + "Run such commands with no extra input to see their usage explanations (e.g. 'cert-add')";
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
