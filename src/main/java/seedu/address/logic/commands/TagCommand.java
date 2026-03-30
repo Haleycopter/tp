@@ -38,16 +38,16 @@ public class TagCommand extends Command {
     public static final String MESSAGE_USAGE = String.format(
             "%s : adds or deletes tags from an existing contact according to the currently displayed list\n\n"
             + "Format : %s INDEX [%sTAGS_TO_ADD] [%sCOLOUR OF ADDED TAGS] [%sTAGS_TO_DELETE] \n"
-            + "Example : %s 1 %sJunior_Dev Cloud Project_1 %s%s %sIntern\n\n"
+            + "Example : %s 1 %sJunior_Dev Cloud Project_1 %s%s\n\n"
             + "Multiple tags are separated with spaces.\n%s",
             COMMAND_WORD,
             COMMAND_WORD, PREFIX_ADD_TAG, PREFIX_COLOUR_TAG, PREFIX_DELETE_TAG,
-            COMMAND_WORD, PREFIX_ADD_TAG, PREFIX_COLOUR_TAG, TagColour.RED.name(), PREFIX_DELETE_TAG,
+            COMMAND_WORD, PREFIX_ADD_TAG, PREFIX_COLOUR_TAG, TagColour.RED.name(),
             TagColour.MESSAGE_COLOUR_OPTIONS);
 
     public static final String MESSAGE_TAG_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_ALL_DUPLICATE_ADD = "All of the tags were duplicates and hence were"
-            + "not added.\n Note: If you are trying to recolour tags, delete them first, then add them back";
+            + " not added.\n Note: If you are trying to recolour tags, delete them first, then add them back";
 
     public static final String MESSAGE_NO_TAGS_TO_DELETE = "No tags were deleted (there were no matching tags)";
 
