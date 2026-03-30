@@ -232,7 +232,6 @@ public class ParserUtilTest {
     }
 
     @Test
-<<<<<<< HEAD
     public void parseCertName_invalidValue_throwsParseException() {
         String invalidCertName = "OSCP@2026";
         assertThrows(ParseException.class, () -> ParserUtil.parseCertName(invalidCertName));
@@ -333,7 +332,8 @@ public class ParserUtilTest {
         String messySalary = "  5 000  ";
         String expectedSalary = "5000";
         assertEquals(new Salary(expectedSalary), ParserUtil.parseSalary(messySalary));
-=======
+
+    @Test
     public void parseSalary_leadingZeros_returnsNormalizedSalary() throws Exception {
         String salaryWithLeadingZeros = "0000004000";
         Salary expectedSalary = new Salary("4000");
@@ -345,6 +345,5 @@ public class ParserUtilTest {
         String salaryWithLeadingZeros = "0000000000";
         Salary expectedSalary = new Salary("0");
         assertEquals(expectedSalary, ParserUtil.parseSalary(salaryWithLeadingZeros));
->>>>>>> master
     }
 }

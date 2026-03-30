@@ -15,13 +15,11 @@ public class Name implements Comparable<Name> {
             + "Utility: leading and trailing whitespaces are trimmed. Internal whitespaces are trimmed to 1.\n";
 
     /*
-     * (1) Only alphabetical characters, single spaces, and forward slashes.
+     * (1) Only alphabetical characters, spaces, and forward slashes.
      * (2) Cannot be blank.
      * (3) Letters immediately beside a forward slash must be uppercase.
-     * This regex ensures the first and last characters are not spaces,
-     * and only single spaces are allowed between characters.
      */
-    public static final String VALIDATION_REGEX = "^[a-zA-Z]+(([ ]|[A-Z]/[A-Z])[a-zA-Z]*)*$";
+    public static final String VALIDATION_REGEX = "^(?=.*[a-zA-Z])[a-zA-Z ]*([A-Z]/[A-Z]|[a-zA-Z ])[a-zA-Z ]*$";
 
     public final String fullName;
 
