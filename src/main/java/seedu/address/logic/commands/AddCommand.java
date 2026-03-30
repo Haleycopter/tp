@@ -39,7 +39,7 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
-    public static final String MESSAGE_WARNING_DUPLICATE = "\nWarning: A similar contact already exists. "
+    public static final String MESSAGE_WARNING_DUPLICATE = "Warning: A similar contact already exists. "
             + "Please verify if this is a duplicate!";
     private static final Logger logger = LogsCenter.getLogger(AddCommand.class);
     private final Person toAdd;
@@ -69,10 +69,10 @@ public class AddCommand extends Command {
         model.addPerson(toAdd);
         String feedback = String.format(MESSAGE_SUCCESS, Messages.format(toAdd));
         if (isPossibleDuplicate) {
-            feedback += MESSAGE_WARNING_DUPLICATE;
+            feedback = MESSAGE_WARNING_DUPLICATE + "\n\n" + feedback;
         }
         logger.info("AddCommand successful: Added " + toAdd.getName());
-        return new CommandResult(feedback);
+        return new CommandResult(feedback, isPossibleDuplicate);
     }
 
     @Override
