@@ -125,10 +125,10 @@ Expected result (starting with the existing sample data):
 > > **Utility**:<br> Leading, trailing and internal whitespaces for `/` will be trimmed (e.g. `  S   /  O` will be trimmed to `S/O`). Internal whitespaces between words will be trimmed to 1.<br><br>
 > > **Duplicate-handling**: case-*insensitive* comparison<br>
 
-> [**PHONE_NUMBER**]<br>
+> [**PHONE**]<br>
 > (1) Can be empty<br>
-> (2) `+` then immediately followed by COUNTRY_CODE followed by space followed by 3 to 15 digits phone number<br>
-> > **Utility**:<br> Leading and trailing whitespaces will be trimmed. Internal whitespaces between `+` and COUNTRY_CODE will be trimmed. Internal whitespaces in PHONE_NUMBER will be trimmed to 1.<br><br>
+> (2) `+` then immediately followed by COUNTRY_CODE(1 to 3 digits) followed by space followed by PHONE(3 to 15 digits)<br>
+> > **Utility**:<br> Leading and trailing whitespaces will be trimmed. Internal whitespaces between `+` and COUNTRY_CODE will be trimmed. Internal whitespaces in PHONE will be trimmed to 1.<br><br>
 > > **Duplicate-handling**: digits and spaces match exactly<br>
 
 > [**EMAIL**]<br>
@@ -160,8 +160,8 @@ Expected result (starting with the existing sample data):
 > > **Duplicate-handling**: digits match exactly<br>
 
 > **PERSON duplicate handling**<br>
-> (1) EMAIL and PHONE_NUMBER are empty: duplicates if NAMEs are the same<br>
-> (2) Else, 2 persons are duplicates if their NAME & PHONE_NUMBER & EMAIL are the same<br>
+> (1) EMAIL and PHONE are empty: duplicates if NAMEs are the same<br>
+> (2) Else, 2 persons are duplicates if their NAME & PHONE & EMAIL are the same<br>
 </box>
 
 
@@ -378,7 +378,7 @@ Big Brother data is saved automatically as a JSON file `[JAR file location]/data
 ## Command summary
 |Format|
 |------|
-`add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [s/SALARY]`
+`add n/NAME [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SALARY]`
 `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SALARY]`
 `delete INDEX`
 `clear`
