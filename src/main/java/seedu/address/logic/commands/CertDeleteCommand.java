@@ -31,6 +31,7 @@ public class CertDeleteCommand extends Command {
     public static final String MESSAGE_USAGE = String.format(
             "%s : deletes a certificate from an existing contact according to the currently displayed list\n\n"
             + "Format : %s INDEX %sCERT_NAME\n"
+            + "CERT_NAME is case-sensitive\n"
             + "Example : %s 2 %sSocial Media Marketing",
             COMMAND_WORD,
             COMMAND_WORD, PREFIX_CERT_NAME,

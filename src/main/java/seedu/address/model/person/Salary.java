@@ -9,7 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Salary {
     public static final String MESSAGE_CONSTRAINTS =
-            "Salaries should contain only digits.";
+            "Salaries should contain only digits, without spaces between digits.";
 
     public static final String VALIDATION_REGEX = "\\d+";
     public final String value;
@@ -22,7 +22,8 @@ public class Salary {
     public Salary(String salary) {
         requireNonNull(salary);
         checkArgument(isValidSalary(String.valueOf(salary)), MESSAGE_CONSTRAINTS);
-        value = salary;
+        String normalized = salary.replaceFirst("^0+(?!$)", "");
+        this.value = normalized.isEmpty() ? salary : normalized;
     }
 
     /**

@@ -71,7 +71,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -164,7 +164,7 @@ This section describes some noteworthy details on how certain features are imple
 
 ###  Undo feature
 
-The `undo` mechanism is implemented within ModelManager. It allows the user to restore the address book to its immediate previous state after a data-modifying command.
+The `undo` mechanism is implemented within ModelManager. It allows the user to restore the address book to its immediate previous state after a data-modifying command, but only once.
 
 #### Implementation
 
@@ -193,6 +193,7 @@ Step 3. The user executes `add n/David …​` to add a new person. The `add` co
 <box type="info" seamless>
 
 **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, preserving the existing undo state.
+**Note:** Non-data-modifying commands like `sort`, `list` and `find` will not call `Model#commitAddressBook()`, preserving the existing undo state.
 
 </box>
 
@@ -281,7 +282,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | Priority | As a …​                                                | I want to …​                                                           | So that I can…​                                                                                               |
 |----------|--------------------------------------------------------|------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------|
 | `* * *`  | new user with internet access                          | see usage instructions in User Guide                                   | refer to instructions when I learn or forget how to use the app                                               |
-| `* * *`  | user without internet access                           | view an offline help menu                                              | learn how to use the app even when I am offline                                                               |
+| `* * *`  | user without internet access                           | view an offline help menu                                              | learn basic usages of the app even when I am offline                                                          |
 | `* * *`  | user                                                   | add a new employee                                                     | I can record details about an employee                                                                        |
 | `* * *`  | user                                                   | delete an employee                                                     | ensure data privacy by removing past employees                                                                |
 | `* * *`  | user                                                   | find employee(s) by specific details                                   | locate details of employees without having to go through the entire list                                      |
@@ -289,14 +290,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | returning user                                         | save and load contacts via a file                                      | quickly restore data from a past session                                                                      |
 | `* * `   | user who likes categorising details                    | add tags to employee contacts                                          | organise employee records by tags                                                                             |
 | `* * `   | user who likes categorising details                    | remove tags to employee contacts                                       | organise employee records by tags                                                                             |
-| `*  `    | busy user who likes categorising details               | mass add and remove tags from currently displayed contact list         | efficiently organise employee records by tags if I am working on a larger scale                               |
+| `*  `    | busy user who likes categorising details               | mass add and remove tags from specific persons displayed contact list  | efficiently organise employee records by tags                                                                 |
 | `* *`    | user who may not have all details at the moment        | add a new employee with partial details                                | at least create a simple record in the contact list, to be updated later                                      |
 | `* *`    | user who is prone to typing wrongly                    | be able to view my employee contact list when I type a command wrongly | refer to the employee details when I want to redo my command                                                  |
 | `* *`    | busy user                                              | edit specific employee details                                         | can be more efficient by not having to delete existing contacts and adding updated ones                       |
 | `* *`    | user who handles many specific employee details        | sort employees by a specified order                                    | quickly view or gather information about employees with a certain criteria                                    |
 | `* *`    | user has a small screen                                | maximise my contact list on screen                                     | view employee details on a larger screen and not see output box when I do not need it                         |
 | `* *`    | user prone to typos                                    | undo my previous command                                               | efficiently restore past details without having to check what they orginally were                             |
-| `* `     | new user                                               | upload file to add a group of employees at once                        | be able to not add employees one by one                                                                       |
+| `* `     | new user replacing past HR manager                     | upload file to add a group of employees at once                        | be able to not add employees one by one                                                                       |
 | `* `     | user who wants to check employees with missing details | view highlighted missing details of employees                          | efficiently see missing information that I have to fill in                                                    |
 | `* `     | user afraid of losing current employee data            | manual backup current employee data to a secondary file                | guard against corruption of main data file                                                                    |
 
@@ -315,10 +316,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. User inputs an invalid command.
-    * 1a1. Big Brother shows an error message.
+* 1a. User inputs an invalid command
+    * 1a1. Big Brother shows an error message
 
-       Use case ends.
+       Use case resumes at step 1.
 
 **Use case: UC2 Add a tag to a person**
 
@@ -333,13 +334,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. The list is empty.
+* 1a. The list is empty
 
   Use case ends.
 
-* 3a. The given index is invalid.
+* 3a. The given person's index is invalid
 
-    * 3a1. Big Brother shows an error message.
+    * 3a1. Big Brother shows an error message
 
       Use case resumes at step 2.
 
@@ -356,13 +357,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. The list is empty.
+* 1a. The list is empty
 
   Use case ends.
 
-* 3a. The user specified cannot be found.
+* 3a. The given person's index is invalid
 
-    * 3a1. Big Brother shows an error message.
+    * 3a1. Big Brother shows an error message
 
       Use case resumes at step 2.
 
@@ -379,19 +380,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. The list is empty.
+* 1a. The list is empty
 
   Use case ends.
 
-* 3a. The user specified cannot be found.
+* 3a. The given person's index is invalid
 
-    * 3a1. Big Brother shows an error message.
+    * 3a1. Big Brother shows an error message
 
       Use case resumes at step 2.
 
-* 3b. The tag specified cannot be found.
+* 3b. The tag specified cannot be found
 
-    * 3b1. Big Brother shows an error message.
+    * 3b1. Big Brother shows an error message
 
       Use case resumes at step 2.
 
@@ -406,8 +407,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. Person specified does not exist.
-    * 1a1. Big Brother shows an error message.
+* 1a. Person specified does not exist
+    * 1a1. Big Brother shows an error message
 
       Use case ends.
 
@@ -449,8 +450,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Employee profile**: Grouped information about an employee's name, phone number, email, address, associated tags (if any), salary and certificates (if any)
-* **Invalid command**: A command that is not supported by the application.
-* **Above average typing speed**: An average typing speed > 80 WPM.
+* **Invalid command**: A command that is not supported by the application
+* **Above average typing speed**: An average typing speed > 80 WPM
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -461,7 +462,7 @@ Given below are instructions to test the app manually.
 <box type="info" seamless>
 
 **Note:** These instructions only provide a starting point for testers to work on;
-testers are expected to do more *exploratory* testing.
+testers are expected to do more *exploratory* testing
 
 </box>
 
@@ -471,14 +472,14 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum
 
 1. Saving window preferences
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+   1. Resize the window to an optimum size. Move the window to a different location. Close the window
 
    1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+       Expected: The most recent window size and location is retained
 
 1. _{ more test cases …​ }_
 
@@ -486,16 +487,16 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a person while all persons are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list
 
    1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated
 
    1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+      Expected: Similar to previous
 
 1. _{ more test cases …​ }_
 

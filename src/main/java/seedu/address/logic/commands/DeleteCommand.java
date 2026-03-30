@@ -21,6 +21,7 @@ public class DeleteCommand extends Command {
     public static final String MESSAGE_USAGE = String.format(
             "%s : deletes an existing contact according to the currently displayed list\n\n"
             + "Format : %s INDEX\n"
+            + "INDEX is represented by digits\n"
             + "Example : %s 1",
             COMMAND_WORD, COMMAND_WORD, COMMAND_WORD);
 
