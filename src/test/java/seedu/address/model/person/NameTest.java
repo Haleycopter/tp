@@ -33,11 +33,15 @@ public class NameTest {
         assertFalse(Name.isValidName("peter*")); // contains non-alphanumeric characters
         assertFalse(Name.isValidName("/")); //only contains forward slash
         assertFalse(Name.isValidName("john s/o diva")); //non-capital letters before and after '/' char
+        assertFalse(Name.isValidName("S / O Tan")); // ParserUtil should have removed these spaces
 
         // valid name
         assertTrue(Name.isValidName("peter jack")); // alphabets only
         assertTrue(Name.isValidName("Capital Tan")); // with capital letters
         assertTrue(Name.isValidName("cApiTal tAn")); // with mix of small and big alphabets
+        assertTrue(Name.isValidName("S/O Tan"));
+        assertTrue(Name.isValidName("Tan S/O John"));
+        assertTrue(Name.isValidName("S/O"));
     }
 
     @Test

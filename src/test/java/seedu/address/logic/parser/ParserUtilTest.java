@@ -309,4 +309,28 @@ public class ParserUtilTest {
         CertExpiry expectedCertExpiry = new CertExpiry(LocalDate.parse("2026-02-08"));
         assertEquals(expectedCertExpiry, ParserUtil.parseCertExpiry(certExpiryWithSpaces));
     }
+
+    @Test
+    public void parsePhone_messyInput_cleansCorrectly() throws Exception {
+        String messyPhone = "   +    65  123      45     ";
+        String expectedPhone = "+65 123 45";
+        assertEquals(new Phone(expectedPhone), ParserUtil.parsePhone(messyPhone));
+
+        // Test no space between + and digits remains same
+        assertEquals(new Phone("+65 123"), ParserUtil.parsePhone("+65 123"));
+    }
+
+    @Test
+    public void parseEmail_internalSpaces_stripsCorrectly() throws Exception {
+        String messyEmail = "  ha + 213 @ gmail . com  ";
+        String expectedEmail = "ha+213@gmail.com";
+        assertEquals(new Email(expectedEmail), ParserUtil.parseEmail(messyEmail));
+    }
+
+    @Test
+    public void parseSalary_internalSpaces_stripsCorrectly() throws Exception {
+        String messySalary = "  5 000  ";
+        String expectedSalary = "5000";
+        assertEquals(new Salary(expectedSalary), ParserUtil.parseSalary(messySalary));
+    }
 }

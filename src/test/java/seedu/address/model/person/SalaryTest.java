@@ -36,6 +36,7 @@ public class SalaryTest {
         // invalid salary
         assertFalse(Salary.isValidSalary("two thousand")); // non-numeric
         assertFalse(Salary.isValidSalary("9011p")); // alphabets within digits
+        assertFalse(Salary.isValidSalary("5 000")); //although ParserUtil will eventually trim internal spaces
 
         // valid salary
         assertTrue(Salary.isValidSalary(null));
