@@ -11,13 +11,13 @@ public class Phone {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Phone numbers should adopt the format:\n"
-            + " + followed by the country code, followed by a space,\n"
-            + "then the phone number of minimum 3 and maximum 15 digits.\n"
+            + " + then immediately followed by the country code, followed by space,\n"
+            + "then a phone number of minimum 3 and maximum 15 digits.\n"
             + "eg +65 81234567";
 
     /* If not blank:
-     * (1) Must start with '+' followed by 1-3 digits for country code.
-     * (2) Must be followed by a single space.
+     * (1) Must start with '+' then immediately followed by 1-3 digits for country code.
+     * (2) Must be followed by spaces.
      * (3) Must then be followed by minimum 3 and maximum 15 digits.
      */
     public static final String VALIDATION_REGEX = "^\\+\\d{1,3} \\d{3,15}$";

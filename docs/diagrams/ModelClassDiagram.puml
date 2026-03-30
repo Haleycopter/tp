@@ -18,7 +18,9 @@ Class Address
 Class Email
 Class Name
 Class Phone
+Class Salary
 Class Tag
+Class Certificate
 
 Class I #FFFFFF
 }
@@ -41,6 +43,8 @@ Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
+Person *--> Salary
+Person *--> "*" Certificate
 Person *--> "*" Tag
 
 Person -[hidden]up--> I
