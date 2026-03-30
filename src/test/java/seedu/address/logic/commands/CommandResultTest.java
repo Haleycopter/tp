@@ -33,6 +33,13 @@ public class CommandResultTest {
 
         // different exit value -> returns false
         assertFalse(commandResult.equals(new CommandResult("feedback", false, true, false)));
+
+        // different isWarning value -> returns false
+        assertFalse(commandResult.equals(new CommandResult("feedback", false, false, true)));
+
+        // Check the 2-argument constructor coverage
+        CommandResult warningResult = new CommandResult("feedback", true);
+        assertTrue(warningResult.equals(new CommandResult("feedback", false, false, true)));
     }
 
     @Test
@@ -50,14 +57,18 @@ public class CommandResultTest {
 
         // different exit value -> returns different hashcode
         assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, true, false).hashCode());
+
+        // different isWarning value -> returns different hashcode
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, false, true).hashCode());
     }
+
 
     @Test
     public void toStringMethod() {
         CommandResult commandResult = new CommandResult("feedback");
         String expected = CommandResult.class.getCanonicalName() + "{feedbackToUser="
                 + commandResult.getFeedbackToUser() + ", showHelp=" + commandResult.isShowHelp()
-                + ", exit=" + commandResult.isExit() + "}";
+                + ", exit=" + commandResult.isExit() + ", isWarning=" + commandResult.isWarning() + "}";
         assertEquals(expected, commandResult.toString());
     }
 }
