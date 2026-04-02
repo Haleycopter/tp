@@ -247,8 +247,29 @@ Format: `undo`
 > * Limited to undoing **exactly one command** to restore the contact list to the immediate previous state.
 > * Will do nothing if there is no change in previous state (e.g. just restarted the app; consecutive attempts to undo; after calling the `list`, `find` or `sort` commands).
 
-<br>
+</box>
 
+### Sorting employee profiles : `sort`
+Format: `sort`
+
+* Sorts the employee profile list by alphabetical order of names.
+
+<box type="warning" seamless>
+
+> **CAUTION:**
+> * Executing `sort` will rearrange the employee profiles in the save file.
+> * This is intentional for convenience and preventing having to execute `sort` repeatedly if nothing has changed.
+
+</box>
+
+<box type="info" seamless>
+
+> Tip: if the above behaviour is undesired, you can run `undo` immediately to restore the previous order.
+
+</box>
+
+<br>
+  
 ### Clearing all entries : `clear`
 Format: `clear`
 
@@ -343,7 +364,7 @@ Big Brother data is saved automatically as a JSON file `[JAR file location]/data
 `cert-edit INDEX n/CERT_NAME [ne/NEW_CERT_NAME] [ee/NEW_CERT_EXPIRY_CERT]`
 `cert-del INDEX n/CERT_NAME`
 `tag INDEX [a/TAGS_TO_ADD] [c/COLOUR_OF_TAGS_TO_ADD] [d/TAGS_TO_DELETE]`
-`sort ...`
+`sort`
 `find [n/NAME] [t/TAG] [c/CERT_NAME] [e/CERT_EXPIRY_DATE]`
 `list`
 `exit`
