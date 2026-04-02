@@ -39,7 +39,8 @@ public class EditCommand extends Command {
     public static final String MESSAGE_USAGE = String.format(
             "%s : edits an existing contact according to the currently displayed list\n\n"
             + "Format : %s INDEX [%sNAME] [%sPHONE] [%sEMAIL] [%sADDRESS] [%sSALARY]\n"
-            + "Example : %s 1 %s5500",
+            + "Example : %s 1 %s5500\n"
+            + "Warning: inputting an empty value for a prefix would result in that value being deleted.",
             COMMAND_WORD,
             COMMAND_WORD, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_SALARY,
             COMMAND_WORD, PREFIX_SALARY);
