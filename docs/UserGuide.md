@@ -32,9 +32,9 @@ Big Brother is a desktop app for Human Resources to manage employee contacts, op
    Note the app name may be slightly different due to versions.<br>
    A GUI similar to the below should appear in a few seconds.<br>
 
-   ![Ui](images/Ui.png)
+<img src="images/Ui.png" width="750" />
 
-1. Type a command in the command box (the red-brown rectangle at the top) and press Enter to execute it.<br>
+6. Type a command in the command box (the red-brown rectangle at the top) and press Enter to execute it.<br>
 * Refer to the [Features](#features) below for details of each command.<br>
 * Refer to the [Input Validation, Duplicate Handling and Utilities](#input-validation-duplicate-handling-and-utilities) below to determine valid inputs, duplication rules and app utilities to help with usage.<br>
 * Refer to the [Summary](#command-summary) below for a summary of all available commands.
@@ -85,7 +85,7 @@ Big Brother is a desktop app for Human Resources to manage employee contacts, op
 ### Viewing in-app help menu : `help`
 Format: `help`
 
-![help message](images/helpMessage.png)
+<img src="images/helpMessage.png" width="750" />
 
 <box type="tip" seamless>
 
@@ -107,7 +107,7 @@ Example: `add n/John Doe p/+65 98765432 e/johnd@example.com a/Abc Rd, Blk 123, #
 
 Expected result (starting with the existing sample data):
 
-![add success](images/addSuccess.png)
+<img src="images/addSuccess.png" width="750" />
 
 <box type="tip" seamless>
 
