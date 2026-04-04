@@ -61,15 +61,16 @@ public class CertExpiry {
         if (this == other) {
             return true;
         }
-        if (other instanceof CertExpiry otherDate) {
-            return this.expiryDate.equals(otherDate.expiryDate);
+        if (!(other instanceof CertExpiry)) { //instanceof handles null
+            return false;
         }
-        return false;
+        CertExpiry otherCertExpiry = (CertExpiry) other;
+        return java.util.Objects.equals(this.expiryDate, otherCertExpiry.expiryDate);
     }
 
     @Override
     public int hashCode() {
-        return expiryDate.hashCode();
+        return java.util.Objects.hashCode(expiryDate);
     }
 
     @Override

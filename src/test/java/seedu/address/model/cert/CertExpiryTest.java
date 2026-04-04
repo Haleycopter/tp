@@ -32,6 +32,12 @@ public class CertExpiryTest {
     }
 
     @Test
+    public void getDisplayDateString_withDate_returnsFormattedDate() {
+        CertExpiry expiry = new CertExpiry(LocalDate.parse("2029-01-01"));
+        assertEquals("2029-01-01", expiry.getDisplayDateString());
+    }
+
+    @Test
     public void getDisplayDateString_nullDate_returnsNoExpiry() {
         CertExpiry noExpiry = new CertExpiry(null);
         assertEquals("No Expiry", noExpiry.getDisplayDateString());
