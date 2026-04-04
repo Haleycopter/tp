@@ -225,7 +225,7 @@ Examples:
 ### Adding certificates : `cert-add`
 Format `cert-add INDEX n/CERT_NAME [e/CERT_EXPIRY_DATE]`
 * Adds a Certificate to a person at the specified `INDEX`.
-* A Certificate must have a name, whereas expiry date is optional.
+* A Certificate must have a name(which is case-insensitive), whereas expiry date is optional.
 * Expiry dates must be formatted as **YYYY-MM-DD**.
 
 Examples:<br>
@@ -241,7 +241,7 @@ Examples:<br>
 ### Deleting certificates : `cert-del`
 Format `cert-del INDEX [n/CERT_NAME]`
 * Deletes a Certificate from a person at the specified `INDEX`.
-* The Certificate to be deleted is specified by only its name.
+* The Certificate to be deleted is specified by only its name, which is case-insensitive.
 
 Example: `cert-del 1 n/OSCP`
 * Deletes the certificate named OSCP from the first person in the list.
@@ -252,8 +252,9 @@ Example: `cert-del 1 n/OSCP`
 Format: `cert-edit INDEX n/CERT_NAME [ne/NEW_CERT_NAME] [ee/NEW_CERT_EXPIRY_DATE]`
 
 * Edits a certificate of the person at the specified `INDEX` of the displayed person list.
-* The Certificate to be edited is specified by its name using the `n/` parameter.
-* Either the `ne/` and/or the `ee/` flags must be included, depending on whether the name or the expiry date has to be edited.
+* The Certificate to be edited is specified by its name using the `n/` parameter, which is case-insensitive.
+* Either the `ne/` and/or the `ee/` flags **must** be included, depending on whether the name or the expiry date has to be edited.
+* If the new expiry date is to be updated to "No Expiry", user input after `ee/` is left empty.
 * Overwriting a Certificate with the same CERT_NAME and CERT_EXPIRY_DATE is allowed.
 
 Example: `cert-edit 1 n/OSCP ne/OSCP2`
