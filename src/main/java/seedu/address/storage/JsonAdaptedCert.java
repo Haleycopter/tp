@@ -54,7 +54,7 @@ class JsonAdaptedCert {
         if (!CertExpiry.isValidCertExpiry(certExpiry)) {
             throw new IllegalValueException(CertExpiry.MESSAGE_CONSTRAINTS);
         }
-        return new Certificate(new CertName(certName), new CertExpiry(LocalDate.parse(certExpiry)));
+        return new Certificate(modelName, new CertExpiry(LocalDate.parse(certExpiry)));
     }
 
 }

@@ -19,22 +19,22 @@ Big Brother is a desktop app for Human Resources to manage employee contacts, op
    You may find instructions on how to do so for your operating system version [here](https://se-education.org/guides/tutorials/javaInstallation.html).<br>
    **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
-1. Download the latest `.jar` file from [here](https://github.com/AY2526S2-CS2103T-T09-1/tp/releases).
+2. Download the latest `.jar` file from [here](https://github.com/AY2526S2-CS2103T-T09-1/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for Big Brother.
+3. Copy the file to the folder you want to use as the _home folder_ for Big Brother.
 
-1. Open a command terminal (you can search for it in the start menu) and change the working folder to the one you put the app in. All operating systems support this with the `cd` command:<br>
+4. Open a command terminal (you can search for it in the start menu) and change the working folder to the one you put the app in. All operating systems support this with the `cd` command:<br>
    **Windows** `cd C:\Users\your_username\big_brother_home_folder`<br>
    **Linux** `cd /home/your_username/big_brother_home_folder`<br>
    **Mac** `cd /Users/your_username/big_brother_home_folder`<br>
 
-1. Run the `java -jar bigbrother.jar` command to start the app.<br>
+5. Run the `java -jar bigbrother.jar` command to start the app.<br>
    Note the app name may be slightly different due to versions.<br>
    A GUI similar to the below should appear in a few seconds.<br>
 
    ![Ui](images/Ui.png)
 
-1. Type a command in the command box (the red-brown rectangle at the top) and press Enter to execute it.<br>
+6. Type a command in the command box (the red-brown rectangle at the top) and press Enter to execute it.<br>
 * Refer to the [Features](#features) below for details of each command.<br>
 * Refer to the [Input Validation, Duplicate Handling and Utilities](#input-validation-duplicate-handling-and-utilities) below to determine valid inputs, duplication rules and app utilities to help with usage.<br>
 * Refer to the [Summary](#command-summary) below for a summary of all available commands.
@@ -68,13 +68,13 @@ Big Brother is a desktop app for Human Resources to manage employee contacts, op
   e.g. if the command specifies `n/NAME`, `n /NAME` is not acceptable.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if you input `help 123`, it will interpreted as just `help`.
+  e.g. if you input `help 123`, it will be interpreted as just `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
 ### Navigating the GUI
-* The GUI is structured such that the main contacts list is a big scrollable section, and the contact entries are smaller scollable sections.
+* The GUI is structured such that the main contacts list is a big scrollable section, and the contact entries are smaller scrollable sections.
 
 * You can hover your mouse cursor over the desired scroll bar, then scroll each section independently.
 
@@ -91,7 +91,7 @@ Format: `help`
 
 **Tips for in-app help**
 
-> You can automatically close the popups with Enter on Windows and Linux, or Spacebar on Mac.<br>
+> You can automatically close the popups with Enter on Windows and Linux, or space bar on Mac.<br>
 
 > If you need more help with a command marked by a `*`, enter it with no arguments into the command box.
 > Example: to get more help for `add`, enter `add` into the command box.
@@ -163,14 +163,19 @@ Format: `find [n/NAME] [t/TAG] [c/CERT_NAME] [e/CERT_EXPIRY_DATE]`
 * For `NAME`, `TAG` and `CERT_NAME`, the match is case-insensitive and can match part of the word.
   * e.g. 'john' will match 'Johny'
 * For `CERT_EXPIRY_DATE`, the match is for certificates that expire **before** the provided date.
+* If a person has only 1 certificate with no expiry date, then performing `find e/CERT_EXPIRY_DATE` will result in filtering away this person since a forever valid certificate will never expire before any given date.
+* But if a person has more than 1 certificate, some with and some without an expiry date, all of their certificates will still be displayed so long as at least 1 of their certificates match the search.
 * A field can be used more than once to expand the search (i.e. `OR` search), except for `CERT_EXPIRY` (see Ex 1).
   * Use repeated fields, not spaces, for `OR` (i.e. `find t/HR t/IT` and not `find t/HR IT`)
-* Multiple fields can be used to narrow down the search (i.e `AND` search) (see Ex 3).
+* Multiple fields can be used to narrow down the search (i.e. `AND` search) (see Ex 3).
 
 Examples:
 1. `find n/Alex Y n/David` returns all persons whose name contains `Alex Y` or `David`.
 2. `find c/OSCP` returns all persons with certificate names containing `OSCP`.
 3. `find n/Alex t/IT e/2027-03-15` returns all persons whose name contains `Alex`, with tags that contain `IT` and with certificates that expire before 15th March 2027.
+
+> **Tip:**
+> If you want to see the original contact list after performing a `find` command, use the `list` command instead of the `undo` command, since finding is not a data-modifying command that changes state of the contact list.
 
 <br>
 
@@ -181,7 +186,21 @@ Format: `list`
 
 ### Sorting all contacts : `sort`
 Format: `sort`
-* Sorts currently displayed contact list in increasing alphabetical order.
+* Sorts the employee profile list by alphabetical order of names.
+
+<box type="warning" seamless>
+
+> **CAUTION:**
+> * Executing `sort` will rearrange the employee profiles in the save file.
+> * This is intentional for convenience and preventing having to execute `sort` repeatedly if nothing has changed.
+
+</box>
+
+<box type="info" seamless>
+
+> Tip: if the above behaviour is undesired, you can run `undo` immediately to restore the previous order.
+
+</box>
 
 <br>
 
@@ -204,13 +223,14 @@ Examples:
 <br>
 
 ### Adding certificates : `cert-add`
-Format `cert-add INDEX n/CERT_NAME e/CERT_EXPIRY_DATE`
+Format `cert-add INDEX n/CERT_NAME [e/CERT_EXPIRY_DATE]`
 * Adds a Certificate to a person at the specified `INDEX`.
-* A Certificate must have both a name and an expiry date.
+* A Certificate must have a name, whereas expiry date is optional.
 * Expiry dates must be formatted as **YYYY-MM-DD**.
 
-Example: `cert-add 1 n/OSCP e/2028-03-05`
-* Adds a certificate named OSCP with an expiry date on 5th March 2028 to the first person in the list.
+Examples:<br>
+* `cert-add 1 n/OSCP e/2028-03-05` adds a certificate named OSCP with an expiry date on 5th March 2028 to the first person in the list.
+* `cert-add 1 n/CompTIA` adds a certificate named CompTIA with no expiry date to the first person in the list.
 
 <box type="info" seamless>
 
@@ -244,13 +264,13 @@ Example: `cert-edit 1 n/OSCP ne/OSCP2`
 ### Restoring the contact list : `undo`
 Format: `undo`
 
-* Undos the last used command.
+* Undoes the last used command.
 
 <box type="warning" seamless>
 
 > **CAUTION:**
 > * Limited to undoing **exactly one command** to restore the contact list to the immediate previous state.
-> * Will do nothing if there is no change in previous state (e.g. just restarted the app; consecutive attempts to undo; after calling the `list`, `find` or `sort` commands).
+> * Will do nothing if there is no change in previous state (e.g. just restarted the app; consecutive attempts to undo; after calling the `list` or `find` commands).
 
 </box>
 
@@ -338,7 +358,6 @@ Big Brother data is saved automatically as a JSON file `[JAR file location]/data
 > **CAUTION:** <br>
 > If your changes to the data file makes its format invalid, Big Brother will discard all data and start with an empty data file at the next run.  Hence, it is **recommended to make a manual backup of the file before editing it**. Support for the prevention of data loss in the event of corrupted or wrongly-formatted data is planned to be added in a future update. <br><br>
 > Furthermore, certain edits can cause the Big Brother to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
-
 </box>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -358,19 +377,19 @@ Big Brother data is saved automatically as a JSON file `[JAR file location]/data
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
-|Format|
-|------|
-`add n/NAME [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SALARY]`
-`edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SALARY]`
-`delete INDEX`
-`clear`
-`undo`
-`cert-add INDEX n/CERT_NAME e/CERT_EXPIRY_DATE`
-`cert-edit INDEX n/CERT_NAME [ne/NEW_CERT_NAME] [ee/NEW_CERT_EXPIRY_CERT]`
-`cert-del INDEX n/CERT_NAME`
-`tag INDEX [a/TAGS_TO_ADD] [c/COLOUR_OF_TAGS_TO_ADD] [d/TAGS_TO_DELETE]`
-`sort`
-`find [n/NAME] [t/TAG] [c/CERT_NAME] [e/CERT_EXPIRY_DATE]`
-`list`
-`exit`
-`help`
+| Format                                                                     |
+|----------------------------------------------------------------------------|
+| `add INDEX n/NAME [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SALARY]`              |
+| `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SALARY]`           |
+| `delete INDEX`                                                             |
+| `clear`                                                                    |
+| `undo`                                                                     |
+| `cert-add INDEX n/CERT_NAME [e/CERT_EXPIRY_DATE]`                          |
+| `cert-edit INDEX n/CERT_NAME [ne/NEW_CERT_NAME] [ee/NEW_CERT_EXPIRY_CERT]` |
+| `cert-del INDEX n/CERT_NAME`                                               |
+| `tag INDEX [a/TAGS_TO_ADD] [c/COLOUR_OF_TAGS_TO_ADD] [d/TAGS_TO_DELETE]`   |
+| `sort`                                                                     |
+| `find [n/NAME] [t/TAG] [c/CERT_NAME] [e/CERT_EXPIRY_DATE]`                 |
+| `list`                                                                     |
+| `exit`                                                                     |
+| `help`                                                                     |

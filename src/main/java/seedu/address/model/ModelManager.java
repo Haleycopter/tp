@@ -119,7 +119,6 @@ public class ModelManager implements Model {
         addressBook.sort(comparator);
     }
 
-
     //=========== Undo logic =================================================================================
     @Override
     public void commitAddressBook() {
