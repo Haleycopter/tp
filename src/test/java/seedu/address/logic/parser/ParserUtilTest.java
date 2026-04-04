@@ -10,7 +10,6 @@ import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Set;
-import java.util.TreeSet;
 
 import org.junit.jupiter.api.Test;
 
@@ -24,7 +23,7 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.Salary;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagColour;
-import seedu.address.model.tag.TagNameComparator;
+import seedu.address.model.tag.TagSet;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel"; // contains special char @
@@ -215,7 +214,7 @@ public class ParserUtilTest {
     @Test
     public void parseTags_collectionWithValidTags_returnsTagSet() throws Exception {
         Set<Tag> actualTagSet = ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, VALID_TAG_2));
-        Set<Tag> expectedTagSet = new TreeSet<Tag>(new TagNameComparator());
+        Set<Tag> expectedTagSet = new TagSet();
         expectedTagSet.add(new Tag(VALID_TAG_1));
         expectedTagSet.add(new Tag(VALID_TAG_2));
 
@@ -288,8 +287,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseTags_extraWhitespace_returnsNormalizedTags() throws Exception {
-        String tagsWithSpaces = "  HR     hr  ";
-        Set<Tag> expectedTagSet = new TreeSet<>(new TagNameComparator());
+        Set<Tag> expectedTagSet = new TagSet();
         expectedTagSet.add(new Tag("HR"));
         expectedTagSet.add(new Tag("hr"));
         Set<Tag> actualTagSet = ParserUtil.parseTags(Arrays.asList("  HR     ", "hr  "));

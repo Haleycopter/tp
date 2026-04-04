@@ -7,7 +7,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-import java.util.TreeSet;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
@@ -21,7 +20,7 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.Salary;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagColour;
-import seedu.address.model.tag.TagNameComparator;
+import seedu.address.model.tag.TagSet;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -192,7 +191,7 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_TAGNAME_NUMBER_AND_COLOUR_NUMBERS_DIFF);
         }
 
-        final Set<Tag> tagSet = new TreeSet<>(new TagNameComparator());
+        final Set<Tag> tagSet = new TagSet();
         for (int i = 0; i < tags.size(); i += 1) {
             currentColour = TagColour.getTagColourByUserInputName(userInputTagColours.get(i));
 
@@ -213,7 +212,7 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_DUPLICATE_TAGNAME);
         }
 
-        final Set<Tag> tagSet = new TreeSet<>(new TagNameComparator());
+        final Set<Tag> tagSet = new TagSet();
         for (String tagName : tags) {
             tagSet.add(parseTag(tagName, tagColour));
         }
