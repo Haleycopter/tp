@@ -31,7 +31,7 @@ public class CertAddCommand extends Command {
 
     public static final String MESSAGE_USAGE = String.format(
             "%s : adds a certificate to an existing contact according to the currently displayed list\n\n"
-            + "Format : %s INDEX %sCERT_NAME %sCERT_EXPIRY\n"
+            + "Format : %s INDEX %sCERT_NAME [%sCERT_EXPIRY]\n"
             + "Example : %s 2 %sSocial Media Marketing %s2028-06-03",
             COMMAND_WORD,
             COMMAND_WORD, PREFIX_CERT_NAME, PREFIX_CERT_EXPIRY,

@@ -26,7 +26,7 @@ public class CertAddCommandParser implements Parser<CertAddCommand> {
     public CertAddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_CERT_NAME, PREFIX_CERT_EXPIRY);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_CERT_NAME, PREFIX_CERT_EXPIRY)) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_CERT_NAME)) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, CertAddCommand.MESSAGE_USAGE));
         }
@@ -41,7 +41,9 @@ public class CertAddCommandParser implements Parser<CertAddCommand> {
         }
 
         CertName name = ParserUtil.parseCertName(argMultimap.getValue(PREFIX_CERT_NAME).get());
-        CertExpiry expiry = ParserUtil.parseCertExpiry(argMultimap.getValue(PREFIX_CERT_EXPIRY).get());
+        CertExpiry expiry = argMultimap.getValue(PREFIX_CERT_EXPIRY).isPresent()
+                ? ParserUtil.parseCertExpiry(argMultimap.getValue(PREFIX_CERT_EXPIRY).get())
+                : new CertExpiry(null);
         Certificate cert = new Certificate(name, expiry);
 
         return new CertAddCommand(index, cert);

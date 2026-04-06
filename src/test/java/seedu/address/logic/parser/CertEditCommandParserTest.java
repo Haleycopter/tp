@@ -96,4 +96,34 @@ public class CertEditCommandParserTest {
                     e.getMessage());
         }
     }
+
+    @Test
+    public void parse_emptyExpiry_success() throws Exception {
+        // performs cert-edit 1 n/Accounting ee/
+        CertEditCommand certEditCommand = parser.parse("1 n/Accounting ee/");
+
+        CertEditCommand expectedCommand = new CertEditCommand(
+                Index.fromOneBased(1),
+                new Certificate(new CertName("Accounting")),
+                Optional.empty(),
+                Optional.of(new CertExpiry(null)) //expected cert expiry to be "No Expiry"
+        );
+
+        assertEquals(expectedCommand, certEditCommand);
+    }
+
+    @Test
+    public void parse_expiryPrefixAbsent_returnsOptionalEmpty() throws Exception {
+        // performs cert-edit 1 n/Accounting ne/Marketing, without a new exp date indicated
+        CertEditCommand certEditCommand = parser.parse("1 n/Accounting ne/Marketing");
+
+        CertEditCommand expectedCommand = new CertEditCommand(
+                Index.fromOneBased(1),
+                new Certificate(new CertName("Accounting")),
+                Optional.of(new CertName("Marketing")),
+                Optional.empty()
+        );
+
+        assertEquals(expectedCommand, certEditCommand);
+    }
 }

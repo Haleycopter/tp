@@ -65,8 +65,15 @@ public class CertEditCommandParser {
     }
 
     private Optional<CertExpiry> parseOptionalCertExpiry(ArgumentMultimap argMultimap) throws ParseException {
-        return argMultimap.getValue(PREFIX_CERT_EDIT_DATE).isPresent()
-                ? Optional.of(ParserUtil.parseCertExpiry(argMultimap.getValue(PREFIX_CERT_EDIT_DATE).get()))
-                : Optional.empty();
+        if (argMultimap.getValue(PREFIX_CERT_EDIT_DATE).isEmpty()) {
+            return Optional.empty();
+        }
+        String value = argMultimap.getValue(PREFIX_CERT_EDIT_DATE).get();
+        //if the cert exp date is empty, it means the user wants "No Expiry"
+        if (value.trim().isEmpty()) {
+            return Optional.of(new CertExpiry(null));
+        }
+        //else, parse the date normally
+        return Optional.of(ParserUtil.parseCertExpiry(value));
     }
 }

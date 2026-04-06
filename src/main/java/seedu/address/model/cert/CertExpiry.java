@@ -1,7 +1,5 @@
 package seedu.address.model.cert;
 
-import static java.util.Objects.requireNonNull;
-
 import java.time.DateTimeException;
 import java.time.LocalDate;
 
@@ -11,18 +9,24 @@ import java.time.LocalDate;
 public class CertExpiry {
     public static final String MESSAGE_CONSTRAINTS =
             "Certificate expiry dates should be in the format of yyyy-mm-dd.\n"
-            + "The date provided must also be a valid calendar date.\n"
+            + "The date provided must be a valid calendar date.\n"
             + "Tip: check if it is a leap year or if the day exists in that month.\n\n"
             + "Utility: leading and trailing whitespaces are trimmed.";
     private LocalDate expiryDate;
 
     /**
      * Constructs a valid CertExpiry.
-     * @param expiry Expiry date
+     * @param expiry Expiry date, can be null for no expiry.
      */
     public CertExpiry(LocalDate expiry) {
-        requireNonNull(expiry);
         expiryDate = expiry;
+    }
+
+    /**
+     * Returns true if there is an expiry date.
+     */
+    public boolean hasExpiry() {
+        return expiryDate != null;
     }
 
     /**
@@ -37,7 +41,18 @@ public class CertExpiry {
         }
     }
 
+    /**
+     * Returns true if this expiry date is strictly before the {@code otherCertExpiry} date.
+     */
     public boolean isBefore(CertExpiry otherCertExpiry) {
+        //if this cert has no expiry, it is never before another date
+        if (this.expiryDate == null) {
+            return false;
+        }
+        //if other date is null, a specific date is logically before forever
+        if (otherCertExpiry.expiryDate == null) {
+            return true;
+        }
         return expiryDate.isBefore(otherCertExpiry.expiryDate);
     }
 
@@ -46,10 +61,11 @@ public class CertExpiry {
         if (this == other) {
             return true;
         }
-        if (other instanceof CertExpiry otherDate) {
-            return this.expiryDate.equals(otherDate.expiryDate);
+        if (!(other instanceof CertExpiry)) { //instanceof handles null
+            return false;
         }
-        return false;
+        CertExpiry otherCertExpiry = (CertExpiry) other;
+        return java.util.Objects.equals(this.expiryDate, otherCertExpiry.expiryDate);
     }
 
     @Override
@@ -59,10 +75,13 @@ public class CertExpiry {
 
     @Override
     public String toString() {
-        return this.expiryDate.toString();
+        return hasExpiry() ? this.expiryDate.toString() : "No Expiry";
     }
 
     public String getDisplayDateString() {
+        if (expiryDate == null) {
+            return "No Expiry";
+        }
         return expiryDate.toString();
     }
 }

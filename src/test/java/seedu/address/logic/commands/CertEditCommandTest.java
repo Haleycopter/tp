@@ -122,6 +122,43 @@ public class CertEditCommandTest {
     }
 
     @Test
+    public void execute_editCertToNoExpirySuccessful() throws Exception {
+        // setup Person with an existing certificate that has an exp date
+        ArrayList<Certificate> certList = new ArrayList<>();
+        certList.add(new Certificate(new CertName("Accounting"), new CertExpiry(LocalDate.parse("2020-01-01"))));
+
+        Person personWithCert = new PersonBuilder()
+                .withName("John")
+                .withCertificates(certList)
+                .build();
+
+        Model model = new ModelManager(new AddressBook(), new UserPrefs());
+        model.addPerson(personWithCert);
+
+        // create cert-edit command to change that cert to "No Expiry" (Optional containing CertExpiry(null))
+        CertEditCommand certEditCommand = new CertEditCommand(
+                INDEX_FIRST_PERSON,
+                new Certificate(new CertName("Accounting")),
+                Optional.empty(),
+                Optional.of(new CertExpiry(null))
+        );
+
+        ArrayList<Certificate> editedCertList = new ArrayList<>();
+        editedCertList.add(new Certificate(new CertName("Accounting"), new CertExpiry(null)));
+
+        Person personWithEditedCert = new PersonBuilder()
+                .withName("John")
+                .withCertificates(editedCertList)
+                .build();
+
+        String expectedMessage = String.format(CertEditCommand.MESSAGE_SUCCESS, Messages.format(personWithEditedCert));
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(model.getFilteredPersonList().get(0), personWithEditedCert);
+
+        assertCommandSuccess(certEditCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
     public void execute_invalidPersonIndex_failure() {
         Model model = new ModelManager(new AddressBook(), new UserPrefs());
         CertEditCommand certEditCommand = new CertEditCommand(INDEX_FIRST_PERSON,

@@ -19,16 +19,16 @@ Big Brother is a desktop app for Human Resources to manage employee contacts, op
    You may find instructions on how to do so for your operating system version [here](https://se-education.org/guides/tutorials/javaInstallation.html).<br>
    **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
-1. Download the latest `.jar` file from [here](https://github.com/AY2526S2-CS2103T-T09-1/tp/releases).
+2. Download the latest `.jar` file from [here](https://github.com/AY2526S2-CS2103T-T09-1/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for Big Brother.
+3. Copy the file to the folder you want to use as the _home folder_ for Big Brother.
 
-1. Open a command terminal (you can search for it in the start menu) and change the working folder to the one you put the app in. All operating systems support this with the `cd` command:<br>
+4. Open a command terminal (you can search for it in the start menu) and change the working folder to the one you put the app in. All operating systems support this with the `cd` command:<br>
    **Windows** `cd C:\Users\your_username\big_brother_home_folder`<br>
    **Linux** `cd /home/your_username/big_brother_home_folder`<br>
    **Mac** `cd /Users/your_username/big_brother_home_folder`<br>
 
-1. Run the `java -jar bigbrother.jar` command to start the app.<br>
+5. Run the `java -jar bigbrother.jar` command to start the app.<br>
    Note the app name may be slightly different due to versions.<br>
    A GUI similar to the below should appear in a few seconds.<br>
 
@@ -68,17 +68,17 @@ Big Brother is a desktop app for Human Resources to manage employee contacts, op
   e.g. if the command specifies `n/NAME`, `n /NAME` is not acceptable.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if you input `help 123`, it will interpreted as just `help`.
+  e.g. if you input `help 123`, it will be interpreted as just `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
 ### Navigating the GUI
-* The GUI is structured such that the main contacts list is a big scrollable section, and the contact entries are smaller scollable sections.
+* The GUI is structured such that the main contacts list is a big scrollable section, and the contact entries are smaller scrollable sections.
 
 * You can hover your mouse cursor over the desired scroll bar, then scroll each section independently.
 
-* When you perform a command that modifies the contact list or a contact entry, all the contact entries will scroll to the top.
+* When you perform a command that modifies the contact list or a contact entry, every individual contact entry will scroll to the top.
 
 * The main contact list **does not have autoscroll**, so you may need to scroll manually to see the changes after performing a command (e.g. after `add`, the newly added contact is at the bottom).
 
@@ -93,7 +93,7 @@ Format: `help`
 
 **Tips for in-app help**
 
-> You can automatically close the popups with Enter on Windows and Linux, or Spacebar on Mac.<br>
+> You can automatically close the pop-ups with Enter on Windows and Linux, or space bar on Mac.<br>
 
 > If you need more help with a command marked by a `*`, enter it with no arguments into the command box.
 > Example: to get more help for `add`, enter `add` into the command box.
@@ -152,14 +152,19 @@ Format: `find [n/NAME] [t/TAG] [c/CERT_NAME] [e/CERT_EXPIRY_DATE]`
 * For `NAME`, `TAG` and `CERT_NAME`, the match is case-insensitive and can match part of the word.
   * e.g. 'john' will match 'Johny'
 * For `CERT_EXPIRY_DATE`, the match is for certificates that expire **before** the provided date.
+* If a person has only 1 certificate with no expiry date, then performing `find e/CERT_EXPIRY_DATE` will result in filtering away this person since a forever valid certificate will never expire before any given date.
+* But if a person has more than 1 certificate, some with and some without an expiry date, all of their certificates will still be displayed so long as at least 1 of their certificates match the search.
 * A field can be used more than once to expand the search (i.e. `OR` search), except for `CERT_EXPIRY` (see Ex 1).
   * Use repeated fields, not spaces, for `OR` (i.e. `find t/HR t/IT` and not `find t/HR IT`)
-* Multiple fields can be used to narrow down the search (i.e `AND` search) (see Ex 3).
+* Multiple fields can be used to narrow down the search (i.e. `AND` search) (see Ex 3).
 
 Examples:
 1. `find n/Alex Y n/David` returns all persons whose name contains `Alex Y` or `David`.
 2. `find c/OSCP` returns all persons with certificate names containing `OSCP`.
 3. `find n/Alex t/IT e/2027-03-15` returns all persons whose name contains `Alex`, with tags that contain `IT` and with certificates that expire before 15th March 2027.
+
+> **Tip:**
+> If you want to see the original contact list after performing a `find` command, use the `list` command instead of the `undo` command, since finding is not a data-modifying command that changes state of the contact list.
 
 <br>
 
@@ -187,20 +192,27 @@ Examples:
 <br>
 
 ### Adding certificates : `cert-add`
-Format: `cert-add INDEX n/CERT_NAME e/CERT_EXPIRY_DATE`
+Format: `cert-add INDEX n/CERT_NAME [e/CERT_EXPIRY_DATE]`
 * Adds a Certificate to a person at the specified `INDEX`.
-* A Certificate must have both a name and an expiry date.
+* A Certificate must have a name(which is case-insensitive), whereas expiry date is optional.
 * Expiry dates must be formatted as **YYYY-MM-DD**.
 
-Example: `cert-add 1 n/OSCP e/2028-03-05`
-* Adds a certificate named OSCP with an expiry date on 5th March 2028 to the first person in the list.
+Examples:<br>
+* `cert-add 1 n/OSCP e/2028-03-05` adds a certificate named OSCP with an expiry date on 5th March 2028 to the first person in the list.
+* `cert-add 1 n/CompTIA` adds a certificate named CompTIA with no expiry date to the first person in the list.
+
+<box type="info" seamless>
+
+> Tip: If a certificate has **no** expiry date, omit `e/` in the `cert-add` command.
+
+</box>
 
 <br>
 
 ### Deleting certificates : `cert-del`
 Format: `cert-del INDEX n/CERT_NAME`
-* Deletes a certificate of the person at the specified `INDEX` of the displayed person list.
-* The Certificate to be deleted is specified by its name using the `n/` parameter.
+* Deletes a Certificate from a person at the specified `INDEX`.
+* The Certificate to be deleted is specified by only its name, which is case-insensitive.
 
 Example: `cert-del 1 n/OSCP`
 * Deletes the certificate named OSCP from the first person in the list.
@@ -211,9 +223,10 @@ Example: `cert-del 1 n/OSCP`
 Format: `cert-edit INDEX n/CERT_NAME [ne/NEW_CERT_NAME] [ee/NEW_CERT_EXPIRY_DATE]`
 
 * Edits a certificate of the person at the specified `INDEX` of the displayed person list.
-* The Certificate to be edited is specified by its name using the `n/` parameter.
-* At least one of the `ne/` or `ee/` flags must be included, depending on whether the name or the expiry date has to be edited.
-* Overwriting a Certificate with the same `CERT_NAME` and `CERT_EXPIRY_DATE` is allowed.
+* The Certificate to be edited is specified by its name using the `n/` parameter, which is case-insensitive.
+* At least one of the `ne/` and/or the `ee/` flags **must** be included, depending on whether the name or the expiry date has to be edited.
+* If the new expiry date is to be updated to "No Expiry", user input after `ee/` is left empty(e.g. `cert-edit 1 n/Marketing ee/`).
+* Overwriting a Certificate with the same CERT_NAME and CERT_EXPIRY_DATE is allowed.
 
 Example: `cert-edit 1 n/OSCP ne/OSCP2`
 * Edits the certificate originally named 'OSCP' held by the first person in the list, updating its name to 'OSCP2'.
@@ -223,14 +236,14 @@ Example: `cert-edit 1 n/OSCP ne/OSCP2`
 ### Restoring the contact list : `undo`
 Format: `undo`
 
-* Undos the most recently used command which changed the state of the contact list.
+* Undoes the most recently used command which changed the state of the contact list.
 
 <box type="warning" seamless>
 
-**CAUTION:**
+> **CAUTION:**
 > `list` and `find` do not change the state of the contact list, so an `undo` will undo the most recent command that changed the state (e.g. `add` followed by `find` followed by `undo` will undo `add`)
-
 > When an `undo` succeeds, another `undo` cannot be run until another command that changes the state is run (e.g. `undo` followed by `add` followed by `undo`)
+
 </box>
 
 ### Sorting all contacts : `sort`
@@ -243,7 +256,8 @@ Format: `sort`
 <box type="tip" seamless>
 
 **Tip on state of the contact list**
-> `sort` will changed the state of the contact list, so that further commands will be built on the sorted list. If this is undesired, you can run `undo` immediately to restore the previous order.
+> `sort` will change the state of the contact list, so that further commands will be built on the sorted list. If this is undesired, you can run `undo` immediately to restore the previous order.
+
 </box>
 
 <br>
@@ -269,12 +283,12 @@ Format: `exit`
 |------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | NAME             | 1. Cannot be empty<br>2. Only letter, whitespaces and forward slash<br/>3. Letters immediately beside forward slash must be uppercase (e.g. `S/O`)                                                                                                                                                                                                                                                                                                                                                                                                          | case-*insensitive* comparison        | 1. Leading, trailing and internal whitespaces for `/` will be trimmed (e.g.   `S   /  O` will be trimmed to `S/O`). <br/> 2.Internal whitespaces between words will be trimmed to 1.                                                                       |
 | PHONE            | 1. Can be empty<br>2.  `+` then immediately followed by COUNTRY_CODE(1 to 3 digits) followed by space followed by PHONE(3 to 15 digits)<br/>                                                                                                                                                                                                                                                                                                                                                                                                                | digits and whitespaces match exactly | 1. Leading and trailing whitespaces will be trimmed.<br/>2. Internal whitespaces between `+` and COUNTRY_CODE will be trimmed. <br/>3. Internal whitespaces in PHONE will be trimmed to 1.<br/>(e.g. ` +  33 22 34 55 ` will be trimmed to `+33 22 34 55`) |
-| EMAIL            | 1. Can be empty<br>2.  Emails should be of the format `local-part@domain`, where `local-part` should:<br/>a .contain only alphanumeric characters and `+_.-`<br/>b. not start or end with `+_.-`<br/> c. not contain consecutive `+_.-`<br/>3. and `domain` is made of domain labels where each should:<br>a. be separated by `.`<br/>b. contain only alphanumeric characters and hyphens<br/>c. not contain consecutive hyphens<br/>d. start and end only with alphanumeric characters<br/>e. be at least 2 characters long for the last domain label<br/> | case-*insensitive* comparison        | Leading, trailing and internal whitespaces will be trimmed.                                                                                                                                                                                                |
+| EMAIL            | 1. Can be empty<br>2.  Emails should be of the format `local-part@domain`, where `local-part` should:<br/>a .contain only alphanumeric characters and `+_.-`<br/>b. not start or end with `+_.-`<br/> c. not contain consecutive `+_.-`<br/>3. and `domain` is made of domain labels where each should:<br>a. be separated by `.`<br/>b. contain only alphanumeric characters and hyphens<br/>c. not contain consecutive hyphens<br/>d. start and end only with alphanumeric characters<br/>e. be at least 2 characters long for the last domain label<br/> | case-*sensitive* comparison          | Leading, trailing and internal whitespaces will be trimmed.                                                                                                                                                                                                |
 | ADDRESS          | 1. Can be empty<br/>2.  Only alphanumeric characters, whitespaces and `#,-<`<br/> 3. At most 100 characters long                                                                                                                                                                                                                                                                                                                                                                                                                                            | case-*insensitive* comparison        | 1. Leading and trailing whitespaces will be trimmed.<br/> 2. Internal whitespaces will be trimmed to 1.                                                                                                                                                    |
 | SALARY           | 1. Can be empty<br/>2.  Only digits                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | digits match exactly                 | Leading, trailing and internal whitespaces will be trimmed.                                                                                                                                                                                                |
 | TAG              | 1. Only alphanumeric characters and `!@#$?\|<>_*&:;=`<br/>2. At most 30 characters long                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | case-*sensitive* match               | Leading and trailing whitespaces will be trimmed.                                                                                                                                                                                                          |
-| CERT_NAME        | 1. Only alphanumeric characters and whitespaces<br/>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | case-*sensitive* match               | 1. Leading and trailing whitespaces will be trimmed.<br/> 2. Internal whitespaces will be trimmed to 1.                                                                                                                                                    |
-| CERT_EXPIRY_DATE | 1. Must follow format `YYYY-MM-DD`<br/>2. Must be a valid date.<br/>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | same `YYYY-MM-DD`                    | Leading and trailing whitespaces will be trimmed.                                                                                                                                                                                                          |
+| CERT_NAME        | 1. Only alphanumeric characters and whitespaces<br/>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | case-*insensitive* match             | 1. Leading and trailing whitespaces will be trimmed.<br/> 2. Internal whitespaces will be trimmed to 1.                                                                                                                                                    |
+| CERT_EXPIRY_DATE | 1. If used in a compulsory prefix, must follow format `YYYY-MM-DD` or be empty <br/>2. If not empty, must be a valid date.<br/>                                                                                                                                                                                                                                                                                                                                                                                                                             | same `YYYY-MM-DD` or is empty        | Leading and trailing whitespaces will be trimmed.                                                                                                                                                                                                          |
 | INDEX            | 1. Must be a positive integer (e.g. 1)<br/>2. No internal whitespaces are allowed (e.g. if contact list has a person with index `10`, INDEX `10` is valid while `1 0` is invalid)                                                                                                                                                                                                                                                                                                                                                                           | N.A.                                 | Leading and trailing whitespaces will be trimmed.                                                                                                                                                                                                          |
 
 <box type="info" seamless>
@@ -288,6 +302,7 @@ Format: `exit`
 **Additional infomation on duplicate certificates**
 > Possible right after executing [cert-add](#adding-certificates--cert-add) or [cert-edit](#editing-certificates--cert-edit) commands<br>
 > Certificates are duplicates if `CERT_NAME` are duplicates. `CERT_EXPIRY_DATE` is not taken into account. 
+
 </box>
 
 <br>
@@ -322,19 +337,19 @@ Big Brother data is saved automatically as a JSON file `[JAR file location]/data
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
-|Format|
-|------|
-`add n/NAME [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SALARY]`
-`edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SALARY]`
-`delete INDEX`
-`clear`
-`undo`
-`cert-add INDEX n/CERT_NAME e/CERT_EXPIRY_DATE`
-`cert-edit INDEX n/CERT_NAME [ne/NEW_CERT_NAME] [ee/NEW_CERT_EXPIRY_CERT]`
-`cert-del INDEX n/CERT_NAME`
-`tag INDEX [a/TAGS_TO_ADD] [c/COLOUR_OF_TAGS_TO_ADD] [d/TAGS_TO_DELETE]`
-`sort`
-`find [n/NAME] [t/TAG] [c/CERT_NAME] [e/CERT_EXPIRY_DATE]`
-`list`
-`exit`
-`help`
+| Format                                                                     |
+|----------------------------------------------------------------------------|
+| `add INDEX n/NAME [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SALARY]`              |
+| `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SALARY]`           |
+| `delete INDEX`                                                             |
+| `clear`                                                                    |
+| `undo`                                                                     |
+| `cert-add INDEX n/CERT_NAME [e/CERT_EXPIRY_DATE]`                          |
+| `cert-edit INDEX n/CERT_NAME [ne/NEW_CERT_NAME] [ee/NEW_CERT_EXPIRY_CERT]` |
+| `cert-del INDEX n/CERT_NAME`                                               |
+| `tag INDEX [a/TAGS_TO_ADD] [c/COLOUR_OF_TAGS_TO_ADD] [d/TAGS_TO_DELETE]`   |
+| `sort`                                                                     |
+| `find [n/NAME] [t/TAG] [c/CERT_NAME] [e/CERT_EXPIRY_DATE]`                 |
+| `list`                                                                     |
+| `exit`                                                                     |
+| `help`                                                                     |
