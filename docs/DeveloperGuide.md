@@ -463,7 +463,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Instructions for manual testing**
+## **Appendix: Instructions for Manual Testing**
 
 Given below are instructions to test the app manually.
 
@@ -478,40 +478,92 @@ testers are expected to do more *exploratory* testing
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+   1. Download the jar file and copy into an empty folder.
+   2. Open the jar file.
+   3. Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum; resize if necessary.
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum
+2. Saving window preferences
 
-1. Saving window preferences
+   1. Resize the window to an optimum size.
+   2. Move the window to a different screen location.
+   3. Close the window.
+   4. Re-launch the app.
+   5. Expected: The most recent window size and its screen location is retained.
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window
+### Managing Employee Certificates
 
-   1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained
+1. Adding certificates with expiry
 
-1. _{ more test cases …​ }_
+   1. Test case: `cert-add 1 n/OSCP e/2026-12-31`
+   2. Expected: OSCP certificate with the specified date is added to the first person.
+
+2. Adding certificates without an expiry
+
+   1. Test case: `cert-add 1 n/Marketing`
+   2. Expected: Marketing certificate is added to the first person with "No Expiry" displayed.
+
+3. Editing existing certificate's name and date
+
+   1. Prerequisites: Person at index 1 has an "OSCP" certificate.
+   2. Test case (Change name and date): `cert-edit 1 n/OSCP ne/CISSP ee/2027-01-01`
+   3. Expected: OSCP is renamed to CISSP with the new date 2027-01-01.
+
+4. Reset existing certificate's date to no expiry
+
+   1. Prerequisites: Person at index 1 has an "CISSP" certificate, with expiry date "2027-01-01".
+   2. Test case (Reset to No Expiry): `cert-edit 1 n/CISSP ee/`
+   3. Expected: CISSP certificate expiry is cleared and now displays "No Expiry".
 
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated
+    2. Test case: `delete 1`<br>
+       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same
+    3. Test case: `delete 0`<br>
+       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous
+    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous
 
-1. _{ more test cases …​ }_
+### Finding and Filtering
 
-### Saving data
+1. Finding by Expiry Date
+   1. Prerequisites: Multiple employees, all with various certificate expiry dates; at least one with "No Expiry".
+   2. Test case: `find e/2026-06-01`
+   3. Expected: Lists employees as long as they have at least one certificate expiring **before** 2026-06-01.
+
+### Managing Salaries
+
+1. Adding/Editing Salary
+   1. Test case: `edit 1 s/5500 0`
+   2. Expected: The salary for the first employee is updated to 55000.
+
+   3. Test case: `edit 1 s/-100`
+   4. Expected: Error message indicates that salary must be a non-negative number.
+
+### Undo Functionality
+
+1. Undoing Certificate Changes
+   1. Test case: Add a certificate, then type `undo`.
+   2. Expected: The certificate is removed, and the model returns to the state prior to the `cert-add` command.
+   3. Constraint: Attempt to type `undo` again.
+   4. Expected: Error message indicates that only one undo is currently supported.
+
+### Data Persistence and Reliability
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Simulation: Close the app and manually edit `data/addressbook.json`.
+   2. Corrupt a date: Change a certificate expiry date to an invalid format (e.g. "2026-13-45").
+   3. Relaunch: Start the application.
+   4. Expected: The app detects the illegal value, logs a warning, and starts with an empty AddressBook to prevent a crash.
 
-1. _{ more test cases …​ }_
+2. Simulating "No Expiry" in Storage
+
+   1. Simulation: Manually edit `data/addressbook.json` and set a certificate's expiry to "No Expiry".
+   2. Relaunch: Start the application.
+   3. Expected: The app loads the contact successfully, and the certificate displays "No Expiry" in the UI.
