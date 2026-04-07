@@ -145,17 +145,17 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String tag} into a {@code Tag}.
+     * Parses a {@code String tagName} and {@code TagColour } into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
      * Extra internal whitespaces will be reduced to one.
      *
      * @throws ParseException if the given {@code tag} is invalid.
      */
-    public static Tag parseTag(String tag, TagColour tagColour) throws ParseException {
-        requireNonNull(tag);
+    public static Tag parseTag(String tagName, TagColour tagColour) throws ParseException {
+        requireNonNull(tagName);
         requireNonNull(tagColour);
 
-        String trimmedTag = normaliseWhiteSpace(tag);
+        String trimmedTag = normaliseWhiteSpace(tagName);
 
         logger.finest("Attempting to create Tag: " + trimmedTag + " " + tagColour.name());
         if (!Tag.isValidTagName(trimmedTag)) {
@@ -167,6 +167,18 @@ public class ParserUtil {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS_LENGTH);
         }
         return new Tag(trimmedTag, tagColour);
+    }
+
+    /**
+     * Parses a {@code String tagName} into a {@code Tag}.
+     * Leading and trailing whitespaces will be trimmed.
+     * Extra internal whitespaces will be reduced to one.
+     *
+     * @throws ParseException if the given {@code tag} is invalid.
+     */
+    public static Tag parseTag(String tagName) throws ParseException {
+        requireNonNull(tagName);
+        return new Tag(tagName, TagColour.DEFAULT);
     }
 
     /**
