@@ -192,7 +192,7 @@ Examples:
 <box type="info" seamless>
 
 > **Note:**
-> * Duplicate tag(s) (i.e. the contact already has a tag of that name, regardless of colour) will be silently ignored when adding a mix of duplicate and non-duplicate tag(s). 
+> * Duplicate tag(s) (i.e. the contact already has a tag of that name, regardless of colour) will be silently ignored when adding a mix of duplicate and non-duplicate tag(s).
 > * Likewise, non-existent tag(s) (i.e. the contact does not have a tag with that name) will be silently ignored when deleting a mix of existing and non-existing tag(s).
 
 </box>
@@ -268,7 +268,7 @@ Format: `sort`
 </box>
 
 <br>
-  
+
 ### Clearing all entries : `clear`
 Format: `clear`
 
@@ -308,7 +308,7 @@ Format: `exit`
 
 **Additional infomation on duplicate certificates**
 > Possible right after executing [cert-add](#adding-certificates--cert-add) or [cert-edit](#editing-certificates--cert-edit) commands<br>
-> Certificates are duplicates if `CERT_NAME` are duplicates. `CERT_EXPIRY_DATE` is not taken into account. 
+> Certificates are duplicates if `CERT_NAME` are duplicates. `CERT_EXPIRY_DATE` is not taken into account.
 
 </box>
 
