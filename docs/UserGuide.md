@@ -255,6 +255,8 @@ Format: `undo`
 
 </box>
 
+<br>
+
 ### Sorting all contacts : `sort`
 Format: `sort`
 * Sorts the contact list in alphabetical order of name.
