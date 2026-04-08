@@ -14,18 +14,16 @@ Given below are my contributions to the project.
   * Justification: This feature improves the product significantly because the user has better control over tag management.
   * Highlights: This enhancement affects parsing and existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
 
-* **New Feature**: TODO: Added Coloured Tagging functionality for contacts.
-  * What it does: allows the user to use a tag command to add multiple coloured tags at once.
-  * Justification: This feature improves the product significantly because the user can compartmentalize tags by colours.
-  * Highlights: This enhancement affects how tags are added, stored, deleted and displayed. The implementation too was challenging as it required changes to existing parsing and other classes that store tags.
-
 * **Code contributed**: [RepoSense link]()
 
 * **Project management**:
-  * Managed release `v1.1`, `v1.4` and `v1.5` on GitHub
+  * Managed release `v1.1`, `v1.2`, `v1.3`, `v1.4` and `v1.5` on GitHub
 
 * **Enhancements to existing features**:
-  * -- TODO --
+    * **New Enhancement**: TODO: Added Coloured Tagging functionality for contacts.
+      * What it does: allows the user to use a tag command to add multiple coloured tags at once.
+      * Justification: This enhancement improves the product significantly because the user can compartmentalize tags by colours.
+      * Highlights: This enhancement affects how tags are added, stored, deleted and displayed. The implementation too was challenging as it required changes to existing parsing and other classes that store tags.
 
 * **Documentation**:
   * User Guide:
@@ -39,6 +37,3 @@ Given below are my contributions to the project.
   * Contributed to forum discussions (examples: -- TODO --)
   * Reported bugs and suggestions for other teams in the class (examples: -- TODO --)
   * Some parts of the history feature I added was adopted by several other classmates (-- TODO --)
-
-* **Tools**:
-* -- TODO --
