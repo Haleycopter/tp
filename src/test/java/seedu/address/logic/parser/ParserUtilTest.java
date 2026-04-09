@@ -204,10 +204,10 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseTags_emptyList_throwsAssertionError() throws Exception {
-        assertThrows(AssertionError.class, () -> ParserUtil.parseTags(Collections.emptyList()));
-        assertThrows(AssertionError.class, () -> ParserUtil.parseTags(Collections.emptyList(), List.of("red")));
-        assertThrows(AssertionError.class, () -> ParserUtil.parseTags(List.of("tagName"), Collections.emptyList()));
+    public void parseTags_emptyList_throwsParseError() throws Exception {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTags(Collections.emptyList()));
+        assertThrows(ParseException.class, () -> ParserUtil.parseTags(Collections.emptyList(), List.of("red")));
+        assertThrows(ParseException.class, () -> ParserUtil.parseTags(List.of("tagName"), Collections.emptyList()));
     }
 
     @Test
