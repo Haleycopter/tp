@@ -1,6 +1,6 @@
 ---
   layout: default.md
-    title: "Haley's Project Portfolio Page"
+  title: "Haley's Project Portfolio Page"
 ---
 
 ### Project: Big Brother
