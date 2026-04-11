@@ -231,7 +231,7 @@ Step 11. `TagCommand` returns a `CommandResult` object to indicate success or a 
 
 ###  Undo feature
 
-The `undo` mechanism is implemented within ModelManager. It allows the user to restore the address book to its immediate previous state after a data-modifying command, but only once.
+The `undo` mechanism is implemented within ModelManager. It allows the user to restore the address book to its immediate previous state after a data-modifying command, but only once, and **within the same** user session.
 
 #### Implementation
 
