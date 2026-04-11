@@ -141,6 +141,11 @@ Parameters:
 * **You may clear attributes by entering an empty prefix.** (see Ex 2)
 * Input values can be the same as existing values (e.g. if person with [`INDEX`](#input-validation-duplicate-handling-and-utilities) 2 already has [`SALARY`](#input-validation-duplicate-handling-and-utilities) of `3000`, you can still perform `edit 2 sal/3000`)
 
+**Note when editing multiple same persons**
+> 1. Duplicated persons and same persons **do not** mean the same; same persons are persons with exact same fields (e.g. Index 1 and 2 are same persons with `NAME` John with `SALARY` of 4000).<br>
+> 2. When there are multiple same persons, `edit` will modify the person with the smallest index between the same persons, regardless of the INDEX specified.<br>
+> 3. Since the persons are the same after all, the intended outcome of the user is still achieved.<br>
+
 Example:
 1. `edit 1 p/+017 91234567 e/johndoe@example.com` edits person 1's [`PHONE`](#input-validation-duplicate-handling-and-utilities) number to `+017 91234567` and the [`EMAIL`](#input-validation-duplicate-handling-and-utilities) to `johndoe@example.com`
 2. `edit 1 p/ e/` clears person 1's [`PHONE`](#input-validation-duplicate-handling-and-utilities) and [`EMAIL`](#input-validation-duplicate-handling-and-utilities). These attributes will now appear blank
