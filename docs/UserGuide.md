@@ -50,6 +50,11 @@ Big Brother allows you to manage employee contacts, on your desktop, with keyboa
 * Words in `UPPER_CASE` are the parameters that you supply.<br>
   e.g. for `n/NAME`, `NAME` is the parameter.
 
+* In this document, there are symbol buttons which represent the parameters of the corresponding command. The colours indicate whether the parameters are mandatory or optional.<br>
+  <a href="#input-validation-duplicate-handling-and-utilities" class="badge bg-primary">MUST_SPECIFY</a>
+  <a href="#input-validation-duplicate-handling-and-utilities" class="badge bg-secondary">FULLY_OPTIONAL</a>
+  <a href="#input-validation-duplicate-handling-and-utilities" class="badge bg-dark">AT_LEAST_ONE_BLACK_PARAM_MUST_BE_SPECIFIED</a><br> If you click on the buttons, they will send you to [Input Validation](#input-validation-duplicate-handling-and-utilities) .
+
 * Arguments not in square brackets are compulsory.<br>
   e.g. `n/NAME`, `INDEX`
 
@@ -70,7 +75,7 @@ Big Brother allows you to manage employee contacts, on your desktop, with keyboa
 * Prefix symbol and `/` **cannot** be separated by whitespaces.<br>
   e.g. if the command specifies `n/NAME`, `n /NAME` is not acceptable.
 
-* Extraneous parameters for commands that do not take in arguments (such as [`help`](#viewing-in-app-help-menu-help) , [`list`](#listing-all-contacts-list), [`exit`](#exiting-the-program-exit), [`undo`](#restoring-the-contact-list--undo), [`sort`](#sorting-all-contacts--sort) and [`clear`](#clearing-all-entries-clear)) will be ignored.<br>
+* Extraneous parameters for commands that do not take in arguments (such as [`help`](#viewing-in-app-help-menu-help) , [`list`](#listing-all-contacts-list), [`exit`](#exiting-the-program-exit), [`undo`](#restoring-the-contact-list-undo), [`sort`](#sorting-all-contacts-sort) and [`clear`](#clearing-all-entries-clear)) will be ignored.<br>
   e.g. if you input `help 123`, it will be interpreted as just [`help`](#viewing-in-app-help-menu-help) .
 
 * If you encounter any validation issues, refer to [Input Validation, Duplicate Handling and Utilities](#input-validation-duplicate-handling-and-utilities) for clarification.
@@ -111,10 +116,10 @@ Format: `add n/NAME [p/PHONE] [e/EMAIL] [a/ADDRESS] [sal/SALARY]`
 <br>
 Parameters:
 <a href="#input-validation-duplicate-handling-and-utilities" class="badge bg-primary">NAME</a>
-<a href="#input-validation-duplicate-handling-and-utilities" class="badge bg-dark">PHONE</a>
-<a href="#input-validation-duplicate-handling-and-utilities" class="badge bg-dark">EMAIL</a>
-<a href="#input-validation-duplicate-handling-and-utilities" class="badge bg-dark">ADDRESS</a>
-<a href="#input-validation-duplicate-handling-and-utilities" class="badge bg-dark">SALARY</a>
+<a href="#input-validation-duplicate-handling-and-utilities" class="badge bg-secondary">PHONE</a>
+<a href="#input-validation-duplicate-handling-and-utilities" class="badge bg-secondary">EMAIL</a>
+<a href="#input-validation-duplicate-handling-and-utilities" class="badge bg-secondary">ADDRESS</a>
+<a href="#input-validation-duplicate-handling-and-utilities" class="badge bg-secondary">SALARY</a>
 * Adds a person, with your specified attributes, to the contact list.
 * You may omit any (or all) of the optional arguments.
 
@@ -223,8 +228,9 @@ Parameters:
 * **You must either specify the add `a/` prefix or the delete `d/` prefix. Both arguments cannot be specified at the same time.**
 * If multiple tags are to be added or deleted, you should separate their names are by spaces. (e.g. `a/TAG1 TAG2`). Note that the `tag` command is the only command with this property.
 * There are 5 colour options for `COLOUR_OF_TAGS_TO_ADD`: `RED`, `YELLOW`, `GREEN`, `BLUE` (default), and `PURPLE`.
-  * You can either specify one colour per tag in `a/` (separated by space, i.e `a/TAG1 TAG2 c/RED GREEN`), or specify one single colour to be applied to all tags (i.e `a/TAG1 TAG2 c/red`).
-  * colours are case-insensitive, so `c/red` and `c/RED` are both valid.
+  * You can either specify one colour to match 1-for-1 per tag in `a/`, separated by space. (i.e `a/TAG1 TAG2 c/RED GREEN`. Note that the specified number of tags and colours **must** be the same. See Ex 4 for more details)
+  * Alternatively, you may instead specify one single colour to be applied to all tags (i.e `a/TAG1 TAG2 c/red`).
+  * Colours are case-insensitive, so `c/red` and `c/RED` are both valid.
   * When deleting, do not use the `c/` prefix.
 
 Examples:
@@ -237,7 +243,9 @@ All the below commands affect the person at `INDEX` 1
 
 **Notes on duplicate / non-existent tag handling**
 > If you add duplicate tag(s) (i.e. the contact already has a tag of that name, regardless of colour), they will be silently ignored when adding a mix of duplicate and non-duplicate tag(s).
+
 > Likewise, non-existent tag(s) (i.e. the contact does not have a tag with that name) will be silently ignored when deleting a mix of existing and non-existing tag(s).
+
 > If you specify duplicate tag names in the command itself, Big Brother will throw an error. (i.e. `tag 1 a/TAG TAG c/RED BLUE` is not allowed)
 
 </box>
@@ -357,7 +365,7 @@ Format: `exit`
 | EMAIL            | 1. Can be empty<br>2.  Emails should be of the format `local-part@domain`, where `local-part` should:<br/>a .contain only alphanumeric characters and `+_.-`<br/>b. not start or end with `+_.-`<br/> c. not contain consecutive `+_.-`<br/>3. and `domain` is made of domain labels where each should:<br>a. be separated by `.`<br/>b. contain only alphanumeric characters and hyphens<br/>c. not contain consecutive hyphens<br/>d. start and end only with alphanumeric characters<br/>e. be at least 2 characters long for the last domain label<br/> | case-*sensitive* comparison                                      | Leading, trailing and internal whitespaces will be trimmed.                                                                                                                                                                                                |
 | ADDRESS          | 1. Can be empty<br/>2.  Only alphanumeric characters, whitespaces and `#,-<`<br/> 3. At most 100 characters long                                                                                                                                                                                                                                                                                                                                                                                                                                            | case-*insensitive* comparison                                    | 1. Leading and trailing whitespaces will be trimmed.<br/> 2. Internal whitespaces will be trimmed to 1.                                                                                                                                                    |
 | SALARY           | 1. Can be empty<br/>2.  Only integers and no special characters <br/>3. Round-off salaries with decimals to the nearest integer                                                                                                                                                                                                                                                                                                                                                                                                                             | digits match exactly                                             | Leading, trailing and internal whitespaces will be trimmed.                                                                                                                                                                                                |
-| TAG              | 1. Only alphanumeric characters and `!@#$?\|<>_*&:;=`<br/>2. At most 30 characters long                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | case-*sensitive* match.<br>Colours do not affect duplicate match | Leading and trailing whitespaces will be trimmed.                                                                                                                                                                                                          |
+| TAG              | 1. Only alphanumeric characters and `!@#$?\|<>_-*&:;=`<br/>2. At most 30 characters long                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | case-*sensitive* match.<br>Colours do not affect duplicate match | Leading and trailing whitespaces will be trimmed.                                                                                                                                                                                                          |
 | CERT_NAME        | 1. Only alphanumeric characters and whitespaces<br/>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | case-*insensitive* match                                         | 1. Leading and trailing whitespaces will be trimmed.<br/> 2. Internal whitespaces will be trimmed to 1.                                                                                                                                                    |
 | CERT_EXPIRY_DATE | 1. If used in a compulsory prefix, must follow format `YYYY-MM-DD` or be empty <br/>2. If not empty, must be a valid date.<br/>                                                                                                                                                                                                                                                                                                                                                                                                                             | same `YYYY-MM-DD` or is empty                                    | Leading and trailing whitespaces will be trimmed.                                                                                                                                                                                                          |
 | INDEX            | 1. Must be a positive non-zero integer (e.g. 1)<br/>2. Cannot be higher than the recorded number of employees.<br/>3. No internal whitespaces are allowed (e.g. if contact list has a person at index `10`, INDEX `10` is valid while `1 0` is invalid)                                                                                                                                                                                                                                                                                                     | N.A.                                                             | Leading and trailing whitespaces will be trimmed.                                                                                                                                                                                                          |
