@@ -82,13 +82,12 @@ public class TagCommand extends Command {
 
         Person personToEdit = lastShownList.get(targetIndex.getZeroBased());
 
-        Set<Tag> updatedTags = new TagSet(personToEdit.getTags());
-        Set<Tag> sharedTags = updatedTags.stream().filter(tagsToUpdate::contains)
-                .collect(Collectors.toSet());
+        Set<Tag> sharedTags = personToEdit.getTags().stream().filter(tagsToUpdate::contains)
+                .collect(Collectors.toCollection(TagSet::new));
 
         Person editedPerson = modifyTagsForPerson(personToEdit, tagsToUpdate, isAdd);
 
-        if (isAdd && !sharedTags.isEmpty()) {
+        if (isAdd && (sharedTags.containsAll(tagsToUpdate))) {
             throw new CommandException(MESSAGE_ALL_DUPLICATE_ADD);
         } else if (!isAdd && sharedTags.isEmpty()) {
             throw new CommandException(MESSAGE_NO_TAGS_TO_DELETE);

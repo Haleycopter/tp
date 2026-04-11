@@ -25,6 +25,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.TagColour;
 import seedu.address.model.tag.TagSet;
 
 /**
@@ -120,7 +121,7 @@ public class TagCommandTest {
     }
 
     @Test
-    public void execute_deleteNonexistentTagsUnfilteredList_failure() {
+    public void execute_deleteAllNonexistentTagsUnfilteredList_failure() {
 
         Set<Tag> toDelete = new TagSet();
         toDelete.add(new Tag("Non-existent"));
@@ -128,6 +129,38 @@ public class TagCommandTest {
         TagCommand tagCommand = new TagCommand(INDEX_FIRST_PERSON, toDelete, false);
 
         assertCommandFailure(tagCommand, model, TagCommand.MESSAGE_NO_TAGS_TO_DELETE);
+    }
+
+    @Test
+    public void execute_deleteSomeNonexistentTagsUnfilteredList_success() {
+        Person originalPerson = model.getFilteredPersonList().get(1);
+
+        Tag nonExistentTag = new Tag("TEST", TagColour.RED);
+        Tag toDeleteTag = new Tag(originalPerson.getTags().stream().toList().get(0).tagName);
+
+        TagSet tagsToDelete = new TagSet();
+        tagsToDelete.add(toDeleteTag);
+        tagsToDelete.add(nonExistentTag);
+        TagCommand tagCommand = new TagCommand(INDEX_SECOND_PERSON, tagsToDelete, false);
+
+        TagSet expectedTags = new TagSet();
+        expectedTags.addAll(originalPerson.getTags());
+        expectedTags.remove(toDeleteTag);
+
+        Person editedPerson = new Person(originalPerson.getName(),
+                originalPerson.getPhone(),
+                originalPerson.getEmail(),
+                originalPerson.getAddress(),
+                expectedTags,
+                originalPerson.getSalary(),
+                originalPerson.getCertificates());
+
+        String expectedMessage = String.format(TagCommand.MESSAGE_TAG_EDIT_PERSON_SUCCESS,
+                Messages.format(editedPerson));
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(originalPerson, editedPerson);
+        assertCommandSuccess(tagCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -149,18 +182,49 @@ public class TagCommandTest {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
+        expectedModel.setPerson(originalPerson, editedPerson);
 
         assertCommandFailure(tagCommand, model, expectedMessage);
     }
 
     @Test
-    public void execute_duplicateTagUnfilteredList_failure() {
-        Person originalPerson = model.getFilteredPersonList().get(0);
+    public void execute_addAllDuplicateTagsUnfilteredList_failure() {
+        Person originalPerson = model.getFilteredPersonList().get(1);
 
         TagCommand tagCommand = new TagCommand(INDEX_SECOND_PERSON, originalPerson.getTags(), true);
 
         assertCommandFailure(tagCommand, model, TagCommand.MESSAGE_ALL_DUPLICATE_ADD);
+    }
+
+    @Test
+    public void execute_addSomeDuplicateTagsUnfilteredList_success() {
+        Person originalPerson = model.getFilteredPersonList().get(1);
+
+        Tag tagToAdd = new Tag("TEST", TagColour.RED);
+
+        TagSet tagsToAdd = new TagSet();
+        tagsToAdd.add(new Tag(originalPerson.getTags().stream().toList().get(0).tagName, TagColour.PURPLE));
+        tagsToAdd.add(tagToAdd);
+        TagCommand tagCommand = new TagCommand(INDEX_SECOND_PERSON, tagsToAdd, true);
+
+        TagSet expectedTags = new TagSet();
+        expectedTags.addAll(originalPerson.getTags());
+        expectedTags.add(tagToAdd);
+
+        Person editedPerson = new Person(originalPerson.getName(),
+                originalPerson.getPhone(),
+                originalPerson.getEmail(),
+                originalPerson.getAddress(),
+                expectedTags,
+                originalPerson.getSalary(),
+                originalPerson.getCertificates());
+
+        String expectedMessage = String.format(TagCommand.MESSAGE_TAG_EDIT_PERSON_SUCCESS,
+                Messages.format(editedPerson));
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(originalPerson, editedPerson);
+        assertCommandSuccess(tagCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -169,6 +233,7 @@ public class TagCommandTest {
         TagCommand tagCommand = new TagCommand(outOfBoundIndex, Set.of(new Tag("Test")), true);
 
         assertCommandFailure(tagCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+
     }
 
     @Test
