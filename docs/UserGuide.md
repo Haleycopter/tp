@@ -197,6 +197,8 @@ Examples:
 2. `find c/OSCP` returns all persons with certificate names containing `OSCP`.
 3. `find n/Alex t/IT e/2027-03-15` returns all persons whose name contains `Alex`, with tags that contain `IT` and with certificates that expire before 15th March 2027.
 
+> Note: The filtered list provided by `find` is a one-time view that does not persist across multiple commands.
+
 <box type="tip" seamless>
 
 **Tip on viewing the full list again**
