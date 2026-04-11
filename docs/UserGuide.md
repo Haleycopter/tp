@@ -406,13 +406,8 @@ Big Brother's data is saved automatically as a JSON file `[JAR file location]/da
 ## Command summary
 | Format                                                                                                        |
 |---------------------------------------------------------------------------------------------------------------|
-<<<<<<< HEAD
 | [`add INDEX n/NAME [p/PHONE] [e/EMAIL] [a/ADDRESS] [sal/SALARY]`](#adding-a-new-contact-add)                  |
 | [`edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [sal/SALARY]`](#editing-an-existing-contact-edit)       |
-=======
-| [`add n/NAME [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SALARY]`](#adding-a-new-contact-add)                          |
-| [`edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SALARY]`](#editing-an-existing-contact-edit)         |
->>>>>>> master
 | [`delete INDEX`](#deleting-an-existing-contact-delete)                                                        |
 | [`clear`](#clearing-all-entries-clear)                                                                        |
 | [`undo`](#restoring-the-contact-list-undo)                                                                    |
