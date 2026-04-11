@@ -15,6 +15,8 @@
 
 * This project evolved from the [AddressBook-Level3 project](https://github.com/se-edu/addressbook-level3) created by the [SE-EDU initiative](https://se-education.org).
 
+> Note: Some components of this project are internally still referred to as "AddressBook"/"address book". These components are related to the Storage and/or Logic aspects of the system and functionally serve the purpose of the address book within the overall application.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting Up, Getting Started**
@@ -260,7 +262,7 @@ Step 3. The user executes `add n/David …​` to add a new person. The `add` co
 <box type="info" seamless>
 
 **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, preserving the existing undo state.
-**Note:** Non-data-modifying commands like `sort`, `list` and `find` will not call `Model#commitAddressBook()`, preserving the existing undo state.
+**Note:** Non-data-modifying commands like `list` and `find` will not call `Model#commitAddressBook()`, preserving the existing undo state.
 
 </box>
 
@@ -570,11 +572,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Glossary
 
+* **Employee**: An individual whose contact details and employment information are tracked in the application.
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Employee profile**: Grouped information about an employee's name, phone number, email, address, associated tags (if any), salary and certificates (if any)
 * **Invalid command**: A command that is not supported by the application
 * **Above average typing speed**: An average typing speed > 80 WPM
+* **Certificate**: Work skill certificates that are industry-recognised and qualify an employee for the job.
 
 --------------------------------------------------------------------------------------------------------------------
 

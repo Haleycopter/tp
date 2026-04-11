@@ -202,6 +202,8 @@ Examples:
 2. `find c/OSCP` returns all persons with certificate names containing `OSCP`.
 3. `find n/Alex t/IT e/2027-03-15` returns all persons whose name contains `Alex`, with tags that contain `IT` and with certificates that expire before 15th March 2027.
 
+> Note: The filtered list provided by `find` is a one-time view that does not persist across multiple commands.
+
 <box type="tip" seamless>
 
 **Tip on viewing the full list again**
@@ -427,7 +429,7 @@ Big Brother's data is saved automatically as a JSON file `[JAR file location]/da
 | [`clear`](#clearing-all-entries-clear)                                                                        |
 | [`undo`](#restoring-the-contact-list-undo)                                                                    |
 | [`cert-add INDEX n/CERT_NAME [e/CERT_EXPIRY_DATE]`](#adding-certificates-cert-add)                            |
-| [`cert-edit INDEX n/CERT_NAME [ne/NEW_CERT_NAME] [ee/NEW_CERT_EXPIRY_CERT]`](#editing-certificates-cert-edit) |
+| [`cert-edit INDEX n/CERT_NAME [ne/NEW_CERT_NAME] [ee/NEW_CERT_EXPIRY_DATE]`](#editing-certificates-cert-edit) |
 | [`cert-del INDEX n/CERT_NAME`](#deleting-certificates-cert-del)                                               |
 | [`tag INDEX [a/TAGS_TO_ADD] [c/COLOUR_OF_TAGS_TO_ADD] [d/TAGS_TO_DELETE]`](#adding-and-deleting-tags-tag)     |
 | [`sort`](#sorting-all-contacts-sort)                                                                          |
