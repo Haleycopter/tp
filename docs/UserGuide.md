@@ -265,6 +265,7 @@ Parameters:
 * **You must supply the certificate with a name (which is case-insensitive).**
 * Expiry dates are optional (you can omit `e/` for Certificates that have no expiry date).
 * Expiry dates must be formatted as **YYYY-MM-DD**.
+* Expiry dates can be expired, for record-keeping purposes.
 
 Examples:<br>
 1. `cert-add 1 n/OSCP e/2028-03-05` adds a certificate named OSCP with an expiry date on 5th March 2028 to the first person in the list.
