@@ -15,6 +15,8 @@
 
 * This project evolved from the [AddressBook-Level3 project](https://github.com/se-edu/addressbook-level3) created by the [SE-EDU initiative](https://se-education.org).
 
+* ChatGPT was used to help with understanding JavaFx classes and methods.
+
 > Note: Some components of this project are internally still referred to as "AddressBook"/"address book". These components are related to the Storage and/or Logic aspects of the system and functionally serve the purpose of the address book within the overall application.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -357,6 +359,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * `   | user who handles company compliance risks                                     | add and find certificates in employee contacts                                                                     | send employees for training or retraining, before they are assigned specialised roles                         |
 | `* * `   | user who handles employee qualifications                                      | edit and delete certificates in employee contacts                                                                  | update my employees' qualifications when there is a change                                                    |
 | `* * `   | user who handles employee qualifications                                      | add and edit certificates without an expiry date                                                                   | record lifetime employee qualifications that never expire                                                     |
+|`* *`| user who handles employee qualifications | add and edit certificates that have already expired | record the history of certificates held |
 | `* * `   | user who works with employee salaries                                         | add and edit salaries in employee contacts                                                                         | use salary details without depending on another app                                                           |
 | `* * `   | user who likes categorising details                                           | add and delete tags to employee contacts                                                                           | organise employee records by tags                                                                             |
 | `* * `   | user who likes categorising details                                           | colour my employees' tags                                                                                          | organise employee records visually by coloured tags                                                           |
@@ -584,15 +587,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ## **Appendix: Planned Enhancements**
 
+Team size: 5
+
 1. **Accept empty or whitespace-only `e/` field as "No Expiry" date in `cert-add` command**: Currently, `cert-add` requires the user to omit the `e/` prefix to set a "No Expiry" date. If the prefix is provided without a value, it triggers a format error. We plan to update the parser to treat `e/` or `e/    ` as a valid instruction to set the date to "No Expiry".
 2. **Provide specific index for index-out-of-bounds error messages**: Current error messages for invalid indices are generic. We plan to update them to specify the valid range based on the current list size (e.g. "The person index provided is invalid. Please provide an index between 1 and 5").
 3. **Add auto-spacing fixes to `CertExpiry` validation**: We plan to make date-parsing more lenient by automatically trimming internal whitespaces in inputs like `2026 - 01 - 01` to be processed as `2026-01-01`.
-4. **Provide specific feedback for duplicate certificates**: If a user tries to rename a certificate to one that the person already possesses, the error message is simply "This person already has this certificate." We plan to make this more specific by naming the certificate: "Operation failed: This person already possesses the '[Certificate Name]' certificate."
+4. **Enhance searching to seek negative matches**: Currently the implementation of `find` only allows for positive results (a contact has the search term, such as a Tag or Certificate). We plan to implement searching for negative results (a contact *does not* have the search term).
 5. **Provide specific feedback for duplicate persons**: When a command triggers a person duplication warning, it does not specify which contact is duplicated. We plan to include the index of the existing duplicate person in the warning message.
 6. **Enhance the `undo` command's visual feedback**: After an `undo` operation, it can be difficult to see which entry changed. We plan to implement a brief highlight effect on the affected `PersonCard` in the UI.
 7. **Prevent certificate names from being purely numeric**: To avoid confusion with indices in commands, we plan to restrict certificate names so they cannot consist entirely of numbers (e.g. `cert-add 1 n/12345` would be rejected). This ensures the parser doesn't misinterpret names as purely indices in future command expansions. This would improve input validation.
-8. **Improve scrolling performance for contacts with many certificates**: For employees with a very high number of qualifications, the individual scrollable contact box can sometimes lag during window resizing. We plan to optimize the `PersonListPanel` to use a more efficient cell-rendering strategy for the `FlowPane` containing certificates.
+8. **Enhance searching to accept all possible attributes**: Currently, `find` only takes Name, Tag, Certificate Name and Certificate Expiry. This was because `find` was implemented for the user to organise the contacts into groups for work purposes. We plan to add support for the fields: Phone, Email, Address, Salary and any future fields that may be added.
 9. **Add more flexibility to Name validation**: Currently, the Name field does not accept hyphens, apostrophes, numbers and some other unique names that appear in reality. We plan to accept more of such unique names by increasing the flexibility of our Name input validation in the future.
+10. **Enhance utility of `tag` command**: Currently, the `tag` command cannot directly change the colour of a Tag, and would require a deletion of a Tag followed by a creation of a Tag with the same name but now with the desired colour. We plan to implement a way for this utility to be performed in a single command.
 
 --------------------------------------------------------------------------------------------------------------------
 

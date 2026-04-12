@@ -269,6 +269,7 @@ Parameters:
 * **You must supply the certificate with a name (which is case-insensitive).**
 * Expiry dates are optional (you can omit `e/` for Certificates that have no expiry date).
 * Expiry dates must be formatted as **YYYY-MM-DD**.
+* Expiry dates can be expired, for record-keeping purposes.
 
 Examples:<br>
 1. `cert-add 1 n/OSCP e/2028-03-05` adds a certificate named OSCP with an expiry date on 5th March 2028 to the first person in the list.
@@ -334,7 +335,7 @@ Format: `sort`
 * Sorts the contact list in alphabetical order of name.
 * Uppercase is prioritised over lowercase (i.e. "Bob" would be positioned before "alice").
 * The full contact list will be sorted, however filtered entries remain filtered.
-  * e.g. if [`find`]((#searching-contacts-by-criteria-find)) was called before [`sort`](#sorting-all-contacts-sort), only the found contacts remain displayed.
+  * e.g. if [`find`](#searching-contacts-by-criteria-find) was called before [`sort`](#sorting-all-contacts-sort), only the found contacts remain displayed.
 
 <box type="tip" seamless>
 
