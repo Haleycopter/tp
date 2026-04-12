@@ -5,6 +5,9 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CERT_EDIT_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CERT_EDIT_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CERT_NAME;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static seedu.address.logic.parser.Parser.MESSAGE_PREFIX_MISSING_PRECEEDING_SPACE;
+import static seedu.address.logic.parser.ParserUtil.MESSAGE_NO_INDEX;
 
 import java.time.LocalDate;
 import java.util.Optional;
@@ -46,11 +49,12 @@ public class CertEditCommandParserTest {
     @Test
     public void parse_noIndex_failure() {
         try {
-            parser.parse("n/Accounting ee/2028-03-05");
+            parser.parse(" n/Accounting ee/2028-03-05"); // needs preceeding space, otherwise different error
         } catch (ParseException e) {
-            assertEquals(new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, CertEditCommand.MESSAGE_USAGE)).getMessage(),
-                    e.getMessage());
+            String expectedErrorMessage = String.format("%s\n\n%s",
+                    MESSAGE_NO_INDEX,
+                    CertEditCommand.MESSAGE_USAGE);
+            assertEquals(new ParseException(expectedErrorMessage).getMessage(), e.getMessage());
         }
     }
 
@@ -125,5 +129,23 @@ public class CertEditCommandParserTest {
         );
 
         assertEquals(expectedCommand, certEditCommand);
+    }
+
+    @Test
+    public void parse_prefixMissingPreceedingSpace_failure() {
+        // cert name
+        assertParseFailure(parser,
+                "1n/OSCP ne/OSCP Plus ee/2028-01-01",
+                PREFIX_CERT_NAME + MESSAGE_PREFIX_MISSING_PRECEEDING_SPACE);
+
+        // cert edit name
+        assertParseFailure(parser,
+                "1 n/OSCPne/OSCP Plus ee/2028-01-01",
+                PREFIX_CERT_EDIT_NAME + MESSAGE_PREFIX_MISSING_PRECEEDING_SPACE);
+
+        // cert edit expiry date
+        assertParseFailure(parser,
+                "1 n/OSCP ne/OSCP Plusee/2028-01-01",
+                PREFIX_CERT_EDIT_DATE + MESSAGE_PREFIX_MISSING_PRECEEDING_SPACE);
     }
 }

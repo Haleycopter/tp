@@ -13,7 +13,9 @@ import seedu.address.model.person.Person;
  */
 public class Messages {
 
-    public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command, use 'help' to view available commands.";
+    public static final String MESSAGE_UNKNOWN_COMMAND =
+            "Unknown command, please check if there is a missing space between the command word "
+            + "and the argument.\nOtherwise, you may use 'help' to view all available commands.";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "%1$s";
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";

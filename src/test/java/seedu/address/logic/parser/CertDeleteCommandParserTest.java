@@ -3,6 +3,9 @@ package seedu.address.logic.parser;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CERT_NAME;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static seedu.address.logic.parser.Parser.MESSAGE_PREFIX_MISSING_PRECEEDING_SPACE;
+import static seedu.address.logic.parser.ParserUtil.MESSAGE_NO_INDEX;
 
 import org.junit.jupiter.api.Test;
 
@@ -38,11 +41,12 @@ public class CertDeleteCommandParserTest {
     @Test
     public void parse_noIndex_failure() {
         try {
-            parser.parse("n/Accounting");
+            parser.parse(" n/Accounting"); // needs preceeding space, otherwise different error
         } catch (ParseException e) {
-            assertEquals(new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, CertDeleteCommand.MESSAGE_USAGE)).getMessage(),
-                    e.getMessage());
+            String expectedErrorMessage = String.format("%s\n\n%s",
+                    MESSAGE_NO_INDEX,
+                    CertDeleteCommand.MESSAGE_USAGE);
+            assertEquals(new ParseException(expectedErrorMessage).getMessage(), e.getMessage());
         }
     }
 
@@ -55,5 +59,13 @@ public class CertDeleteCommandParserTest {
                     .getMessage(),
                     e.getMessage());
         }
+    }
+
+    @Test
+    public void parse_prefixMissingPreceedingSpace_failure() {
+        // cert name
+        assertParseFailure(parser,
+                "1n/OSCP Plus",
+                PREFIX_CERT_NAME + MESSAGE_PREFIX_MISSING_PRECEEDING_SPACE);
     }
 }
