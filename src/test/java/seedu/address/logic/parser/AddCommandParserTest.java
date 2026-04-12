@@ -189,7 +189,7 @@ public class AddCommandParserTest {
     }
 
     @Test
-    public void parse_prefixMissingPreceedingSpace_failure() {
+    public void parse_prefixMissingPrecedingSpace_failure() {
         // name
         assertParseFailure(parser,
                 "n/John p/+65 123 e/john@example.co a/earth sal/1000",
