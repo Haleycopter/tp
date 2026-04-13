@@ -630,8 +630,6 @@ Prerequisites: List all employee contacts using the `list` command. Multiple con
     4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous
 
-<div style="page-break-after: always;"></div>
-
 ### Tagging
 
 Prerequisites: List all persons using the `list` command. Multiple persons in the list.
@@ -645,7 +643,7 @@ Prerequisites: List all persons using the `list` command. Multiple persons in th
     1. Prerequisites: Employee contact at index 1 has no tags named "TAG1" and "TAG2".
     2. Test case (Adding coloured tags): `tag 1 a/TAG1 a/TAG2 c/RED GREEN`<br>
        Expected: One red tag, "TAG1", and one green tag "TAG2" are added to the first contact.
-<br><br>
+
 3. Removing tags from a contact<br>
     1. Prerequisites: Employee contact at index 1 has two blue tags named "TAG1" and "TAG2".
     2. Test case (Deleting tags): `tag 1 d/TAG1`<br>
@@ -654,6 +652,8 @@ Prerequisites: List all persons using the `list` command. Multiple persons in th
 4. Attempting to simultaneously add and delete tags from a contact
     1. Test Case: `tag 1 a/TAG1 d/TAG2`<br>
        Expected: No tags are added or deleted. Format error details show in the help pop-up.
+
+<div style="page-break-after: always;"></div>
 
 ### Finding and Filtering
 
