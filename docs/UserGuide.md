@@ -167,11 +167,6 @@ Parameters:
 * You may clear attributes by entering an empty prefix, **except** for [`NAME`](#input-validation-duplicate-handling-and-utilities) (see Example 2)
 * Input values can be the same as existing values (e.g. if person with [`INDEX`](#input-validation-duplicate-handling-and-utilities) 2 already has [`SALARY`](#input-validation-duplicate-handling-and-utilities) of 3000, you can still perform `edit 2 sal/3000`)
 
-**Note when editing multiple "same" contacts**
-> 1. Duplicate contacts and contacts with the same attribute data are two separate scenarios handled differently by Big Brother; "same contacts" are contacts with exact same fields (e.g. Index 1 and 2 are same persons with [`NAME`](#input-validation-duplicate-handling-and-utilities) John with [`SALARY`](#input-validation-duplicate-handling-and-utilities) of 4000).<br>
-> 2. When there are multiple "same contacts", `edit` will modify the person with the smallest index between the same "contacts", regardless of the [`INDEX`](#input-validation-duplicate-handling-and-utilities) specified.<br>
-> 3. Since the contacts are the same after all, the intended outcome of the user is still achieved.<br>
-
 <div style="page-break-after: always;"></div>
 
 Example:
@@ -269,7 +264,6 @@ All the below commands affect the person at [`INDEX`](#input-validation-duplicat
 
 **Notes on editing tags**
 > Editing of tags is currently not supported. If you would like to change the colour of a tag, you would need to delete it first before adding it back. 
-
 
 </box>
 
