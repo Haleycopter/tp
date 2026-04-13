@@ -262,6 +262,9 @@ All the below commands affect the person at [`INDEX`](#input-validation-duplicat
 
 > If you specify duplicate tag names in the command itself, Big Brother will throw an error. (i.e. `tag 1 a/TAG TAG c/RED BLUE` is not allowed)
 
+**Notes on editing tags**
+> Editing of tags is currently not supported. If you would like to change the colour of a tag, you would need to delete it first before adding it back. 
+
 </box>
 
 ### Adding certificates : `cert-add`
@@ -374,17 +377,17 @@ Format: `exit`
 
 <box type="info" seamless>
 
-**Additional infomation on duplicate persons**
+**Additional information on duplicate persons**
 > Possible right after executing [`add`](#adding-a-new-contact-add) or [`edit`](#editing-an-existing-contact-edit) commands<br>
 > (1) [`EMAIL`](#input-validation-duplicate-handling-and-utilities) and [`PHONE`](#input-validation-duplicate-handling-and-utilities) are empty: duplicates if [`NAME`](#input-validation-duplicate-handling-and-utilities) are the same<br>
 > (2) Else, 2 persons are duplicates if their [`NAME`](#input-validation-duplicate-handling-and-utilities) & [`PHONE`](#input-validation-duplicate-handling-and-utilities) & [`EMAIL`](#input-validation-duplicate-handling-and-utilities) are the same<br><br>
 > **Good news**: there will be a warning pop-up message if duplicate persons are detected after executing a command. It is then up to you to delete duplicates.
 
-**Additional infomation on duplicate certificates**
+**Additional information on duplicate certificates**
 > Possible right after executing [`cert-add`](#adding-certificates-cert-add) or [`cert-edit`](#editing-certificates-cert-edit) commands<br>
 > Certificates are duplicates if [`CERT_NAME`](#input-validation-duplicate-handling-and-utilities) are duplicates. [`CERT_EXPIRY_DATE`](#input-validation-duplicate-handling-and-utilities) is not taken into account.
 
-**Additional infomation on duplicate tags**
+**Additional information on duplicate tags**
 > Possible right after executing [`tag`](#adding-and-deleting-tags-tag), see [`tag`](#adding-and-deleting-tags-tag) for more details.
 
 </box>
