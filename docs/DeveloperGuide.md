@@ -400,10 +400,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `Big Brother` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: UC1 Add a person**<br>
+**Use case: UC1 Add an employee**<br>
 **MSS**
-1. User requests to add a person
-2. Big Brother indicates that a person is added<br>
+1. User requests to add an employee
+2. Big Brother indicates that an employee is added<br>
    Use case ends.
 
 **Extensions**
@@ -411,92 +411,92 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 1a1. Big Brother shows an error message<br>
     Use case resumes at step 1.
 
-**Use case: UC2 Add a tag to a person**<br>
+**Use case: UC2 Add a tag to an employee**<br>
 **MSS**
-1.  User requests to list persons
-2.  Big Brother shows a list of persons
-3.  User requests to add a tag to a specific person in the list
-4.  Big Brother adds the tag to the person<br>
+1.  User requests to list employees
+2.  Big Brother shows a list of employees
+3.  User requests to add a tag to a specific employee in the list
+4.  Big Brother adds the tag to the employee<br>
     Use case ends.
 
 **Extensions**
 * 1a. The list is empty<br>
   Use case ends.
-* 3a. The given person's index is invalid
+* 3a. The given employee's index is invalid
   * 3a1. Big Brother shows an error message<br>
     Use case resumes at step 2.
 
-**Use case: UC3 Delete a person**<br>
+**Use case: UC3 Delete a employee**<br>
 **MSS**
-1.  User requests to list persons
-2.  Big Brother shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  Big Brother deletes the person<br>
+1.  User requests to list employees
+2.  Big Brother shows a list of employees
+3.  User requests to delete a specific employee in the list
+4.  Big Brother deletes the employee<br>
     Use case ends.
 
 **Extensions**
 * 1a. The list is empty<br>
   Use case ends.
-* 3a. The given person's index is invalid
+* 3a. The given employee's index is invalid
   * 3a1. Big Brother shows an error message<br>
     Use case resumes at step 2.
 
 **Use case: UC4 Delete a tag**<br>
 **MSS**
-1.  User requests to list persons
-2.  Big Brother shows a list of persons
-3.  User requests to delete a tag from a specific person in the list
-4.  Big Brother deletes the tag from the person<br>
+1.  User requests to list employees
+2.  Big Brother shows a list of employees
+3.  User requests to delete a tag from a specific employee in the list
+4.  Big Brother deletes the tag from the employee<br>
     Use case ends.
 
 **Extensions**
 * 1a. The list is empty<br>
   Use case ends.
-* 3a. The given person's index is invalid
+* 3a. The given employee's index is invalid
   * 3a1. Big Brother shows an error message<br>
     Use case resumes at step 2.
 * 3b. The tag specified cannot be found
   * 3b1. Big Brother shows an error message<br>
     Use case resumes at step 2.
 
-**Use case: UC5 Find a person**<br>
+**Use case: UC5 Find an employee**<br>
 **MSS**
-1.  User requests to find a specific person
-2.  Big Brother displays the details of the specific person<br>
+1.  User requests to find a specific employee
+2.  Big Brother displays the details of the specific employee<br>
     Use case ends.
 
 **Extensions**
-* 1a. Person specified does not exist
+* 1a. Employee specified does not exist
   * 1a1. Big Brother shows an error message<br>
     Use case ends.
 
-**Use case: UC6 Add a certificate to a person**<br>
+**Use case: UC6 Add a certificate to an employee**<br>
 **MSS**
-1.  User requests to list persons
-2.  Big Brother shows a list of persons
-3.  User requests to add a certificate to a specific person in the list
-4.  Big Brother adds the certificate to the person<br>
+1.  User requests to list employees
+2.  Big Brother shows a list of employees
+3.  User requests to add a certificate to a specific employee in the list
+4.  Big Brother adds the certificate to the employee<br>
     Use case ends.
 
 **Extensions**
 * 1a. The list is empty<br>
   Use case ends.
-* 3a. The given person's index is invalid
+* 3a. The given employee's index is invalid
   * 3a1. Big Brother shows an error message<br>
     Use case resumes at step 2.
 
 **Use case: UC7 Delete a certificate**<br>
 **MSS**
-1.  User requests to list persons
-2.  Big Brother shows a list of persons
-3.  User requests to delete a certificate from a specific person in the list
-4.  Big Brother deletes the certificate from the person<br>
+1.  User requests to list employees
+2.  Big Brother shows a list of employees
+3.  User requests to delete a certificate from a specific employee in the list
+4.  Big Brother deletes the certificate from the employee<br>
     Use case ends.
 
 **Extensions**
 * 1a. The list is empty<br>
   Use case ends.
-* 3a. The given person's index is invalid
+* 3a. The given employee's index is invalid
   * 3a1. Big Brother shows an error message<br>
     Use case resumes at step 2.
 * 3b. The certificate specified cannot be found
@@ -535,14 +535,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Glossary
 
-* **Employee**: An individual whose contact details and employment information are tracked in the application.
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
-* **Employee profile**: Grouped information about an employee's name, phone number, email, address, associated tags (if any), salary and certificates (if any)
-* **Invalid command**: A command that is not supported by the application
-* **Above average typing speed**: An average typing speed > 80 WPM
+* **Employee**: An individual whose contact details and employment information are tracked in the application. This document may also refer to them as **Person**.
+* **Mainstream OS**: Windows, Linux, Unix, MacOS.
+* **Contact**: Grouped information about an employee's name, phone number, email, address, associated tags (if any), salary and certificates (if any) as stored in the app. This document may also use the term **Employee** to describe an abstract implementation of **Contact**.
+* **Invalid command**: A command that is not supported by the application.
+* **Above average typing speed**: An average typing speed > 80 WPM.
 * **Certificate**: Work skill certificates that are industry-recognised and qualify an employee for the job.
-
+* **Tag**: Short, one-word remarks that can be attached to a contact. **Tagging** is the process of adding tags to the contact.
 --------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
@@ -578,79 +577,101 @@ testers are expected to do more *exploratory* testing
 ### Launch and Shutdown
 
 1. Initial launch
-
-   1. Download the jar file and copy into an empty folder.
-   2. Open the jar file.
-   3. Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum; resize if necessary.
-
+   1. Ensure Java `17` is installed.
+   2. Download the jar file and copy into an empty folder.
+   3. Run the jar file in the command terminal via `java -jar bigbrother.jar`.
+   4. Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum; resize if necessary.
+<br><br>
 2. Saving window preferences
-
    1. Resize the window to an optimum size.
    2. Move the window to a different screen location.
    3. Close the window.
    4. Re-launch the app.
    5. Expected: The most recent window size and its screen location is retained.
 
-### Managing Employee Certificates
-
-Prerequisites: List all persons using the `list` command. Multiple persons in the list.
-
-1. Adding certificates with expiry
-
-   1. Test case: `cert-add 1 n/OSCP e/2026-12-31`
-   2. Expected: OSCP certificate with the specified date is added to the first person.
-
-2. Adding certificates without an expiry
-
-   1. Test case: `cert-add 1 n/Marketing`
-   2. Expected: Marketing certificate is added to the first person with "No Expiry" displayed.
-
 <div style="page-break-after: always;"></div>
 
+### Managing Employee Certificates
+
+Prerequisites: List all employee contacts using the `list` command. Multiple contacts in the list.
+
+1. Adding certificates with expiry
+   1. Prerequisites: Employee contact at index 1 has no certificate named "OSCP" (case-insensitive).
+   2. Test case: `cert-add 1 n/OSCP e/2026-12-31`<br>
+      Expected: OSCP certificate with the specified date is added to the first contact.
+<br><br>
+2. Adding certificates without an expiry
+   1. Prerequisites: Employee contact at index 1 has no certificate named "Marketing" (case-insensitive).
+   2. Test case: `cert-add 1 n/Marketing`<br>
+      Expected: Marketing certificate is added to the first contact with "No Expiry" displayed.
+
 3. Editing existing certificate's name and date
-
-   1. Prerequisites: Person at index 1 has an "OSCP" certificate.
-   2. Test case (Change name and date): `cert-edit 1 n/OSCP ne/CISSP ee/2027-01-01`
-   3. Expected: OSCP is renamed to CISSP with the new date 2027-01-01.
-
+   1. Prerequisites: Employee contact at index 1 has an "OSCP" certificate.
+   2. Test case (Change name and date): `cert-edit 1 n/OSCP ne/CISSP ee/2027-01-01`<br>
+      Expected: "OSCP" certificate is renamed to "CISSP" with the new date 2027-01-01 (in the first contact).
+<br><br>
 4. Reset existing certificate's date to no expiry
-
-   1. Prerequisites: Person at index 1 has an "CISSP" certificate, with expiry date "2027-01-01".
-   2. Test case (Reset to No Expiry): `cert-edit 1 n/CISSP ee/`
-   3. Expected: CISSP certificate expiry is cleared and now displays "No Expiry".
+   1. Prerequisites: Employee contact at index 1 has an "CISSP" certificate, with expiry date "2027-01-01".
+   2. Test case (Reset to No Expiry): `cert-edit 1 n/CISSP ee/`<br>
+      Expected: "CISSP" certificate expiry field is cleared and now displays "No Expiry" (in the first contact).
 
 ### Deleting a person
 
-1. Deleting a person while all persons are being shown
+1. Deleting a contact while all contacts are being shown
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Prerequisites: List all contacts using the `list` command. Multiple contacts in the list.
 
     2. Test case: `delete 1`<br>
        Expected: First contact is deleted from the list.
 
     3. Test case: `delete 0`<br>
-       Expected: No person is deleted. Format error details shown in the help pop-up.
+       Expected: No contact is deleted. Format error details shown in the help pop-up.
 
     4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous
+
+<div style="page-break-after: always;"></div>
+
+### Tagging
+
+Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+1. Tagging a contact<br>
+    1. Prerequisites: Employee contact at index 1 has no tags named "TAG1" and "TAG2".
+    2. Test case (Adding tags): `tag 1 a/TAG1 TAG2`<br>
+    Expected: Two blue tags, "TAG1" and "TAG2" are added to the first contact.
+<br><br>
+2. "Colour"-Tagging of a contact<br>
+    1. Prerequisites: Employee contact at index 1 has no tags named "TAG1" and "TAG2".
+    2. Test case (Adding coloured tags): `tag 1 a/TAG1 a/TAG2 c/RED GREEN`<br>
+       Expected: One red tag, "TAG1", and one green tag "TAG2" are added to the first contact.
+<br><br>
+3. Removing tags from a contact<br>
+    1. Prerequisites: Employee contact at index 1 has two blue tags named "TAG1" and "TAG2".
+    2. Test case (Deleting tags): `tag 1 d/TAG1`<br>
+       Expected: One blue tag, "TAG2", remains on the first contact. "TAG1" is removed.
+<br><br>
+4. Attempting to simultaneously add and delete tags from a contact
+    1. Test Case: `tag 1 a/TAG1 d/TAG2`<br>
+       Expected: No tags are added or deleted. Format error details show in the help pop-up.
 
 ### Finding and Filtering
 
 1. Finding by Expiry Date
    1. Prerequisites: Multiple employees, all with various certificate expiry dates; at least one with "No Expiry".
-   2. Test case: `find e/2026-06-01`
-   3. Expected: Lists employees as long as they have at least one certificate expiring **before** 2026-06-01.
+   2. Test case: `find e/2026-06-01`<br>
+   Expected: Lists employees as long as they have at least one certificate expiring **before** 2026-06-01.
 
 ### Managing Salaries
 
-1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
 2. Adding/Editing Salary
-   1. Test case: `edit 1 sal/5500 0`
-   2. Expected: The salary for the first employee is updated to 55000.
+   1. Test case: `edit 1 sal/5500 0`<br>
+      Expected: The salary for the first employee is updated to 55000.
 
-   3. Test case: `edit 1 sal/-100`
-   4. Expected: Error message indicates that salary should be an integer and no special characters.
+   2. Test case: `edit 1 sal/-100`<br>
+      Expected: Error message indicates that salary should be an integer and no special characters.
 
 ### Undo Functionality
 
@@ -663,16 +684,12 @@ Prerequisites: List all persons using the `list` command. Multiple persons in th
 ### Data Persistence and Reliability
 
 1. Dealing with missing/corrupted data files
-
    1. Simulation: Close the app and manually edit `data/addressbook.json`.
    2. Corrupt a date: Change a certificate expiry date to an invalid format (e.g. "2026-13-45").
    3. Relaunch: Start the application.
    4. Expected: The app detects the illegal value, logs a warning, and starts with an empty AddressBook to prevent a crash.
 
-<div style="page-break-after: always;"></div>
-
 2. Simulating "No Expiry" in Storage
-
    1. Simulation: Manually edit `data/addressbook.json` and set a certificate's expiry to "No Expiry".
    2. Relaunch: Start the application.
    3. Expected: The app loads the contact successfully, and the certificate displays "No Expiry" in the UI.
