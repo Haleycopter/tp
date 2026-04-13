@@ -430,6 +430,7 @@ Big Brother's data is saved automatically as a JSON file `[JAR file location]/da
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
+* You can click each command below, which will bring you to their usage details.<br><br>
 | Format                                                                                                        |
 |---------------------------------------------------------------------------------------------------------------|
 | [`add n/NAME [p/PHONE] [e/EMAIL] [a/ADDRESS] [sal/SALARY]`](#adding-a-new-contact-add)                        |
