@@ -662,10 +662,10 @@ Prerequisites: List all persons using the `list` command. Multiple persons in th
     1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
     2. Test case: `delete 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
 
     3. Test case: `delete 0`<br>
-       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+       Expected: No person is deleted. Format error details shown in the status message.
 
     4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous
@@ -686,7 +686,7 @@ Prerequisites: List all persons using the `list` command. Multiple persons in th
    2. Expected: The salary for the first employee is updated to 55000.
 
    3. Test case: `edit 1 sal/-100`
-   4. Expected: Error message indicates that salary must only contain digits and no special characters.
+   4. Expected: Error message indicates that salary should be an integer and no special characters.
 
 ### Undo Functionality
 
@@ -694,7 +694,7 @@ Prerequisites: List all persons using the `list` command. Multiple persons in th
    1. Test case: Add a certificate, then type `undo`.
    2. Expected: The certificate is removed, and the model returns to the state prior to the `cert-add` command.
    3. Constraint: Attempt to type `undo` again.
-   4. Expected: Error message indicates that only one undo is currently supported.
+   4. Expected: Error message indicates that there are no previous commands to undo(since `undo` can only be called once, following a data-modifying command, in current implementation).
 
 ### Data Persistence and Reliability
 
