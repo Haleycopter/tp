@@ -112,7 +112,7 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 <box type="info" seamless>
 
-**Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+**Note:** The lifeline for `DeleteCommandParser` and `DeleteCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </box>
 
 How the `Logic` component works:
@@ -203,11 +203,11 @@ Step 2. The `FindCommandParser` extracts the parameter value `John` and construc
 
 Step 3. `FindCommandParser` adds both predicates into a `List<Predicate<Person>>` which is used to construct a `CombinedPredicate` object. A `CombinedPredicate` implements the interface `Predicate<Person>` and tests a `Person` against all predicates in the supplied list.
 
-Step 4. The `FindCommandParser` creates a `FindCommand` object with the `CombinedPredicate` object
+Step 4. The `FindCommandParser` creates a `FindCommand` object with the `CombinedPredicate` object.
 
-Step 5. The `FindCommand` object is passed to `LogicManager` by `FindCommandParser`
+Step 5. The `FindCommand` object is passed to `LogicManager` by `FindCommandParser`.
 
-Step 6. `FindCommand#execute(Model)` is called by `LogicManager`
+Step 6. `FindCommand#execute(Model)` is called by `LogicManager`.
 
 Step 7. The `FindCommand` object executes the `updateFilteredPersonList(Predicate<Person>)` method that tests all `Persons` with the predicate.
 
@@ -217,17 +217,17 @@ Step 8. Only `Persons` that return `true` with the supplied predicate are kept i
 
 ### Tagging feature
 
-The `tag` command allows for both adding or deleting of tags (but not both at the same time). Colours for these tags can be specified by the user
+The `tag` command allows for both adding or deleting of tags (but not both at the same time). Colours for these tags can be specified by the user.
 
 #### Implementation
 
 <puml src="diagrams/TaggingSequenceDiagram.puml" alt="TaggingSequenceDiagram" />
 
-Given below are the internal steps taken to execute the `tag` command in an example use scenario. Steps 2 and 4 have been omitted from the above diagram for diagram readability.
+Given below are the internal steps taken to execute the `tag` command in an example use scenario. Steps 2 and 4 have been omitted from the above diagram for diagram readability. The lifeline for `TagCommandParser` and `TagCommand` should end at the destroy marker (X) but is similarly limited by PlantUML
 
 Step 1. The user executes the command `tag 1 a/Department IT c/red green`. The `AddressBookParser` extracts the command word `tag` and constructs a `TagCommandParser`.
 
-Step 2. When `TagCommandParser#parse()` is called, it utilizes helper functions from `argMultimap` to check if the correct combination of prefixes were added. An invalid combination results in a `ParserError` being thrown
+Step 2. When `TagCommandParser#parse()` is called, it utilizes helper functions from `argMultimap` to check if the correct combination of prefixes were added. An invalid combination results in a `ParserError` being thrown.
 
 Step 3. `TagCommandParser` passes the tag processing responsibility to `ParseUtil`. `ParseUtil` will throw a `ParserError` if there are input validation errors.
 
@@ -239,13 +239,13 @@ Step 6. `TagCommand` is passed to `LogicManager` by `TagCommandParser` and `Addr
 
 Step 7. `TagCommand#execute(Model)` is called by `LogicManager`.
 
-Step 8. `TagCommand` retrieves the `personToEdit` from `Model#getFilteredPersonList` using `INDEX`
+Step 8. `TagCommand` retrieves the `personToEdit` from `Model#getFilteredPersonList` using `INDEX` (which is 1).
 
-Step 9. `TagCommand` calls `modifyTagsForPerson(Person, Set<Tag>, boolean)`, which creates a copy of `personToEdit` with the updated `Set` of `Tags`
+Step 9. `TagCommand` calls `modifyTagsForPerson(Person, Set<Tag>, boolean)`, which creates a copy of `personToEdit` with the updated `Set` of `Tags`.
 
-Step 10. `TagCommand` calls `Model#setPerson(Person, Person)` to overwrite the old `personToEdit` with a new copy that has the updated `Set` of `Tags`
+Step 10. `TagCommand` calls `Model#setPerson(Index, Person)` to overwrite the old `personToEdit` at `INDEX` with a new copy that has the updated `Set` of `Tags`.
 
-Step 11. `TagCommand` returns a `CommandResult` object to indicate success or a warning.
+Step 11. `TagCommand` returns a `CommandResult` object to indicate success.
 
 <div style="page-break-after: always;"></div>
 
@@ -643,7 +643,7 @@ Prerequisites: List all persons using the `list` command. Multiple persons in th
     1. Prerequisites: Employee contact at index 1 has no tags named "TAG1" and "TAG2".
     2. Test case (Adding coloured tags): `tag 1 a/TAG1 TAG2 c/RED GREEN`<br>
        Expected: One red tag, "TAG1", and one green tag "TAG2" are added to the first contact.
-
+<br><br>
 3. Removing tags from a contact<br>
     1. Prerequisites: Employee contact at index 1 has two blue tags named "TAG1" and "TAG2".
     2. Test case (Deleting tags): `tag 1 d/TAG1`<br>
