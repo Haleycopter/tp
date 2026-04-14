@@ -641,7 +641,7 @@ Prerequisites: List all persons using the `list` command. Multiple persons in th
 <br><br>
 2. "Colour"-Tagging of a contact<br>
     1. Prerequisites: Employee contact at index 1 has no tags named "TAG1" and "TAG2".
-    2. Test case (Adding coloured tags): `tag 1 a/TAG1 a/TAG2 c/RED GREEN`<br>
+    2. Test case (Adding coloured tags): `tag 1 a/TAG1 TAG2 c/RED GREEN`<br>
        Expected: One red tag, "TAG1", and one green tag "TAG2" are added to the first contact.
 
 3. Removing tags from a contact<br>
