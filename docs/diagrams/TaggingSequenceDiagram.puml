@@ -72,6 +72,9 @@ deactivate CommandResult
 
 TagCommand --> LogicManager : r
 deactivate TagCommand
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+TagCommand -[hidden]-> AddressBookParser
+destroy TagCommand
 
 [<--LogicManager
 deactivate LogicManager

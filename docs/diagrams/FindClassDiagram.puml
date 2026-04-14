@@ -5,11 +5,10 @@ show members
 
 class FindCommand #73b3ef {
     + {static} COMMAND_WORD: String
-    - predicate: Predicate<Person>
     + execute(model: Model): CommandResult
 }
 
-interface "Predicate<Person>" as Predicate #dad467{
+interface "Predicate<Person>" as Predicate<<interface>> #dad467{
     + test(person: Person): boolean
 }
 
